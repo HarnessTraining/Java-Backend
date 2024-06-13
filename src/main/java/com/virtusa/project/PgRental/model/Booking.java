@@ -41,7 +41,7 @@ public class Booking {
     @JoinColumn(name = "roomId")
     private Room room;
 
-    @OneToMany(mappedBy = "booking", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PaymentTransactions> paymentTransactions;
 
 }
