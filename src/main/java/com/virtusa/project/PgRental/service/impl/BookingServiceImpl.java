@@ -1,41 +1,44 @@
-// package com.virtusa.project.PgRental.service.impl;
+package com.virtusa.project.PgRental.service.impl;
 
-// import java.util.List;
+import java.util.List;
 
-// import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-// import com.virtusa.project.PgRental.dao.BookingDao;
-// import com.virtusa.project.PgRental.dto.BookingDto;
-// import com.virtusa.project.PgRental.service.BookingService;
+import com.virtusa.project.PgRental.dao.BookingDao;
+import com.virtusa.project.PgRental.dto.BookingDto;
+import com.virtusa.project.PgRental.service.BookingService;
 
-// public class BookingServiceImpl implements BookingService {
 
-//   @Autowired
-//     private BookingDao bookingDao;
+@Service
+public class BookingServiceImpl implements BookingService {
 
-//     @Override
-//     public void createBooking(BookingDto bookingDto) {
-//         bookingDao.createBooking(bookingDto);
-//     }
+  @Autowired
+    private BookingDao bookingDao;
 
-//     @Override
-//     public void updateBooking(BookingDto bookingDto) {
-//         bookingDao.updateBooking(bookingDto);
-//     }
+    @Override
+    public void createBooking(BookingDto bookingDto) {
+        bookingDao.createBooking(bookingDto);
+    }
 
-//     @Override
-//     public BookingDto getBookingDetails(long bookingId) {
-//         return bookingDao.getBookingDetails(bookingId);
-//     }
+    @Override
+    public void updateBooking(BookingDto bookingDto) {
+        bookingDao.updateBooking(bookingDto);
+    }
 
-//     @Override
-//     public void deleteBooking(long bookingId) {
-//         bookingDao.deleteBooking(bookingId);
-//     }
+    @Override
+    public BookingDto getBookingDetails(long bookingId) {
+        return bookingDao.getBookingDetails(bookingId);
+    }
 
-//     @Override
-//     public List<BookingDto> getAllBookings() {
-//         return bookingDao.getAllBookings();
-//     }
+    @Override
+    public void deleteBooking(long bookingId) {
+        bookingDao.deleteBooking(bookingId);
+    }
+
+    @Override
+    public List<BookingDto> getAllBookings() {
+        return bookingDao.getAllBookings();
+    }
     
-// }
+}

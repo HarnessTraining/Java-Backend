@@ -31,8 +31,6 @@ public class PgFacilitiesDao {
     public void createPgFacilities(PgFacilitiesDto pgFacilitiesDto) {
     PgFacilities pgFacilities = modelMapper.map(pgFacilitiesDto, PgFacilities.class);
     // Set the property directly from the property object in the DTO
-    pgFacilities.setProperty(propertyRepository.findById(pgFacilitiesDto.getPropertyId()).orElse(null));
-    pgFacilities.setFacilities(facilitiesRepository.findById(pgFacilitiesDto.getFacilityId()).orElse(null));
     pgFacilitiesRepository.save(pgFacilities);
 }
     public void updatePgFacilities(PgFacilitiesDto pgFacilitiesDto) {

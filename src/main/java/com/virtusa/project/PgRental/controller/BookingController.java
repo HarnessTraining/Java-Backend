@@ -1,11 +1,19 @@
 package com.virtusa.project.PgRental.controller;
 
 import com.virtusa.project.PgRental.dto.BookingDto;
+import com.virtusa.project.PgRental.model.CustomUserDetails;
 import com.virtusa.project.PgRental.service.BookingService;
+import com.virtusa.project.PgRental.service.CustomUserDetailsService;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.List;
 
 @RestController
@@ -15,8 +23,26 @@ public class BookingController {
     @Autowired
     private BookingService bookingService;
 
+    @Autowired
+    private CustomUserDetailsService customUserDetailsService;
+
     @PostMapping
     public ResponseEntity<Void> createBooking(@RequestBody BookingDto bookingDto) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        CustomUserDetails userDetails = (CustomUserDetails) customUserDetailsService.loadUserByUsername(username);
+        bookingDto.setUserId(userDetails.getUserId());
+
+        if (bookingDto.getBookingTime() == null) {
+            bookingDto.setBookingTime(new Timestamp(System.currentTimeMillis()));
+        }
+        if (bookingDto.getStartDate() != null && bookingDto.getNextPaymentDate() == null) {
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(bookingDto.getStartDate());
+            cal.add(Calendar.DAY_OF_MONTH, 31);
+            bookingDto.setNextPaymentDate(cal.getTime());
+        }
+        
         bookingService.createBooking(bookingDto);
         return ResponseEntity.ok().build();
     }
