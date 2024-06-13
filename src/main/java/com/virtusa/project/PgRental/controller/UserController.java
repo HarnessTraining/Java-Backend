@@ -2,6 +2,8 @@ package com.virtusa.project.PgRental.controller;
 
 import com.virtusa.project.PgRental.dto.UserDTO;
 import com.virtusa.project.PgRental.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -19,14 +21,21 @@ import java.util.Optional;
 @RequestMapping("/users")
 public class UserController {
 
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+
     @Autowired
     private UserService userService;
 
     @PostMapping
     public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
-        System.out.println(userDTO);
-        UserDTO createdUser = userService.createUser(userDTO);
-        return ResponseEntity.ok(createdUser);
+        logger.info("Creating user: {}", userDTO.getUserName());
+        try {
+            UserDTO createdUser = userService.createUser(userDTO);
+            return ResponseEntity.ok(createdUser);
+        } catch (Exception e) {
+            logger.error("Error creating user", e);
+            return ResponseEntity.status(500).body(null); // Customize as needed
+        }
     }
     @GetMapping("/current-user")
     public String getCurrentUser() {
@@ -77,27 +86,5 @@ public class UserController {
         userService.deleteUser(id);
         return ResponseEntity.noContent().build();
     }
-//
-//    @GetMapping
-//    @PreAuthorize("hasRole('ROLE_ADMIN')")
-//    public ResponseEntity<List<UserDTO>> getAllUsers() {
-//        List<UserDTO> users = userService.getAllUsers().stream()
-//                .map(user -> mapToDTO(user))
-//                .collect(Collectors.toList());
-//        return ResponseEntity.ok(users);
-//    }
-//
-//    @GetMapping("/{id}")
-//    @PreAuthorize("hasRole('ROLE_USER')")
-//    public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
-//        Optional<UserDTO> user = userService.getUserById(id).map(this::mapToDTO);
-//        return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-//    }
-//
-//    @GetMapping("/username/{userName}")
-//    @PreAuthorize("hasRole('ROLE_USER')")
-//    public ResponseEntity<UserDTO> getUserByUserName(@PathVariable String userName) {
-//        Optional<UserDTO> user = userService.getUserByUserName(userName).map(this::mapToDTO);
-//        return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-//    }
+
 }
