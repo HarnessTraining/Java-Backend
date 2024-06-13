@@ -7,12 +7,12 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 @Entity
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 public class Booking {
 
@@ -41,7 +41,12 @@ public class Booking {
     @JoinColumn(name = "roomId")
     private Room room;
 
-    @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "booking", cascade = CascadeType.REMOVE)
     private List<PaymentTransactions> paymentTransactions;
+
+
+    public Booking() {
+        this.isConfirmed = false;
+    }
 
 }

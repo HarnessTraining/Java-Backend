@@ -37,6 +37,7 @@ public class UserController {
             return ResponseEntity.status(500).body(null); // Customize as needed
         }
     }
+    
     @GetMapping("/current-user")
     public String getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
