@@ -34,27 +34,22 @@ public class Property {
 
     @ManyToOne
     private User user;
-    @OneToMany(mappedBy = "property", cascade = CascadeType.ALL)
+
     @OneToMany(mappedBy = "property", cascade = CascadeType.ALL)
     private List<Complaints> complaints;
 
     @OneToMany(mappedBy = "property",cascade = CascadeType.ALL)
-    @OneToMany(mappedBy = "property",cascade = CascadeType.ALL)
     private List<PgFacilities> pgFacilities;
 
-    @OneToMany(mappedBy = "property",cascade = CascadeType.ALL)
     @OneToMany(mappedBy = "property",cascade = CascadeType.ALL)
     private List<Room> rooms;
 
     @OneToMany(mappedBy = "property", cascade = CascadeType.ALL)
-    @OneToMany(mappedBy = "property", cascade = CascadeType.ALL)
     private List<PropertyPhotos> propertyPhotos;
 
     @OneToMany(mappedBy = "property",cascade = CascadeType.ALL)
-    @OneToMany(mappedBy = "property",cascade = CascadeType.ALL)
     private List<Rating> ratings;
 
-    @OneToMany(mappedBy = "property", cascade = CascadeType.ALL)
     @OneToMany(mappedBy = "property", cascade = CascadeType.ALL)
     private List<UserFavorites> userFavorites;
 }
