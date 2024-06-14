@@ -52,7 +52,6 @@ public class UserController {
 
             return "User: " + userDetails.getUsername() + ", Roles: " + roles.toString();
         }
-
         return "User not authenticated.";
     }
 
