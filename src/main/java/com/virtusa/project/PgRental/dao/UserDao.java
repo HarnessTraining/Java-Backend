@@ -75,4 +75,8 @@ public class UserDao {
             throw new RuntimeException("User not found with id " + id);
         }
     }
+
+    public UserDTO getUserByUserName(String userName) {
+        return modelMapper.map(this.userRepository.findByUserName(userName),UserDTO.class);
+    }
 }

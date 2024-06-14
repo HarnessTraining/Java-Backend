@@ -18,6 +18,8 @@ public interface UserService {
 
     void deleteUser(Long id);
 
+    public UserDTO getUserByUserName(String userName);
+
 //    UserDTO updateUser(Long id, UserDTO userDTO);
 //
 //    void deleteUser(Long id);
