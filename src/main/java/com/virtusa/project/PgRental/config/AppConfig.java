@@ -1,5 +1,6 @@
 package com.virtusa.project.PgRental.config;
 
+import com.virtusa.project.PgRental.dao.PropertyDao;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,3 +12,4 @@ public class AppConfig {
         return new ModelMapper();
     }
 }
+
