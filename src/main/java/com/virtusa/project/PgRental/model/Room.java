@@ -17,7 +17,10 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long roomId;
     private long roomNumber;
-    private String sharingType;
+
+    @Enumerated(EnumType.STRING)
+    @Column( nullable = false)
+    private SharingType sharingType;
 
     private BigDecimal price;
 
@@ -25,7 +28,9 @@ public class Room {
 
     private Date endDate;
 
+    private boolean available;
+
     @ManyToOne
-    @JoinColumn(name = "propertyId")
+//    @JoinColumn(name = "propertyId")
     private Property property;
 }

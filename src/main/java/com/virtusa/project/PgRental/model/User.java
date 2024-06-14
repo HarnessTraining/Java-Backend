@@ -23,19 +23,19 @@ public class User {
     private String referralCode;
     private int referralDiscount;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Property> propertyList;
 
-    @OneToMany(mappedBy = "user",cascade = CascadeType.REMOVE)
-    private List<Rating> ratings;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
-    private List<UserFavorites> userFavorites;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
-    private List<Complaints> complaints;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
-    private List<Notifications> notifications;
+//    @OneToMany(mappedBy = "user",cascade = CascadeType.REMOVE)
+//    private List<Rating> ratings;
+//
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+//    private List<UserFavorites> userFavorites;
+//
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+//    private List<Complaints> complaints;
+//
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+//    private List<Notifications> notifications;
 
 }
