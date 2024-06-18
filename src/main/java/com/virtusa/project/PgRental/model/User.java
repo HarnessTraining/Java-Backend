@@ -1,9 +1,11 @@
-package com.virtusa.project.PgRental.model;
 
+package com.virtusa.project.PgRental.model;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Data
@@ -13,6 +15,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userId;
+    
     private String userName;
     private String email;
     private String password;
@@ -25,10 +28,12 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Property> propertyList;
-
+    
+    @JsonIgnore
     @OneToMany(mappedBy = "user",cascade = CascadeType.REMOVE)
     private List<Rating> ratings;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<UserFavorites> userFavorites;
 
