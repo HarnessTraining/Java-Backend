@@ -5,7 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -16,7 +17,7 @@ public class Rating {
     private long ratingId;
     private int rating;
     private String description;
-    private Timestamp reviewDate;
+    private LocalDateTime reviewDate;
 
     @ManyToOne
     @JoinColumn(name = "propertyId")
@@ -25,4 +26,9 @@ public class Rating {
     @ManyToOne
     @JoinColumn(name = "userId")
     private User user;
+
+    @PrePersist
+    protected void onCreate() {
+        this.reviewDate = LocalDateTime.now();
+    }
 }
