@@ -1,8 +1,9 @@
-package com.virtusa.project.PgRental.service;
+package com.virtusa.project.PgRental.service.impl;
 
 
 import com.virtusa.project.PgRental.dao.UserDao;
 import com.virtusa.project.PgRental.dto.UserDTO;
+import com.virtusa.project.PgRental.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
