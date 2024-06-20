@@ -8,15 +8,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserFavoritesDto {
-    private int favoriteId;
-    private long userId;
-    private long propertyId;
+    private Long favoriteId;
+    private Long userId;
+    private Long propertyId;
 
-    public int getFavoriteId() {
+    public Long getFavoriteId() {
         return this.favoriteId;
     }
 
-    public void setFavoriteId(int favoriteId) {
+    public void setFavoriteId(Long favoriteId) {
         this.favoriteId = favoriteId;
     }
 
