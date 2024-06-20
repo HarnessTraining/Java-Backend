@@ -1,4 +1,4 @@
-package com.virtusa.project.PgRental.service.Impl;
+package com.virtusa.project.PgRental.service.impl;
 
 import java.util.List;
 import java.util.Optional;
