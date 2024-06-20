@@ -19,6 +19,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin
 public class UserController {
 
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
@@ -38,7 +39,7 @@ public class UserController {
         }
     }
     
-    @GetMapping("/current-user")
+    @GetMapping("/http://localhost:8080/users/2")
     public String getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
