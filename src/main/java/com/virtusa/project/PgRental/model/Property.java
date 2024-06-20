@@ -16,7 +16,11 @@ public class Property {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long propertyId;
     private String pgName;
-    private String pgType;
+
+    @Enumerated(EnumType.STRING)
+    @Column( nullable = false)
+    private PgType pgType;
+    //private String pgType;
 
     private String pgAddress;
 
@@ -27,8 +31,8 @@ public class Property {
     private boolean isApproved;
 
     @ManyToOne
-    @JoinColumn(name = "userId")
     private User user;
+
     @OneToMany(mappedBy = "property", cascade = CascadeType.ALL)
     private List<Complaints> complaints;
 

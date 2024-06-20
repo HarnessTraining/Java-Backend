@@ -79,4 +79,6 @@ public class UserDao {
     public UserDTO getUserByUserName(String userName) {
         return modelMapper.map(this.userRepository.findByUserName(userName),UserDTO.class);
     }
+    
+    
 }
