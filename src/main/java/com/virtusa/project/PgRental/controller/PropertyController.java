@@ -28,6 +28,7 @@ public class PropertyController {
 
 
 
+    @CrossOrigin(origins = "http://127.0.0.1:5500")
     @GetMapping("/{propertyId}")
     public ResponseEntity<PropertyDto> getPropertyById(@PathVariable long propertyId) throws ChangeSetPersister.NotFoundException {
         PropertyDto propertyDto = propertyService.getPropertyById(propertyId);
@@ -39,7 +40,7 @@ public class PropertyController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/gett")
     public ResponseEntity<List<PropertyDto>> getAllProperties() {
         List<PropertyDto> propertyDtos = propertyService.getAllProperties();
         return ResponseEntity.ok(propertyDtos);

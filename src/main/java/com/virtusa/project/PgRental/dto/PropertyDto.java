@@ -2,10 +2,12 @@ package com.virtusa.project.PgRental.dto;
 
 import com.virtusa.project.PgRental.model.PgType;
 import lombok.Data;
+import lombok.ToString;
 
 import java.util.List;
 
 @Data
+@ToString
 public class PropertyDto {
     private long propertyId;
     private String pgName;
@@ -16,6 +18,8 @@ public class PropertyDto {
 
     private boolean isApproved;
     private long userId;
+
+
 
     private List<RoomDto> rooms;
 
@@ -98,4 +102,5 @@ public class PropertyDto {
     public void setUserId(long userId) {
         this.userId = userId;
     }
+
 }
