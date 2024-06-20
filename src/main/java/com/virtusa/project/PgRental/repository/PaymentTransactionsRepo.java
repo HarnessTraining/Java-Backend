@@ -1,11 +1,11 @@
 package com.virtusa.project.PgRental.repository;
 
-
-
-import com.virtusa.project.PgRental.model.Room;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public interface RoomRepository extends JpaRepository<Room, Long> {
+import com.virtusa.project.PgRental.model.PaymentTransactions;
+
+public interface PaymentTransactionsRepo extends JpaRepository<PaymentTransactions, Long> {
+
 }
+
