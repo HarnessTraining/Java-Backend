@@ -1,4 +1,4 @@
-package com.virtusa.project.PgRental.service.Impl;
+package com.virtusa.project.PgRental.service.impl;
 
 import java.util.List;
 
@@ -39,6 +39,11 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public List<BookingDto> getAllBookings() {
         return bookingDao.getAllBookings();
+    }
+
+    @Override
+    public List<BookingDto> getBookingsByUserId(Long userId) {
+        return bookingDao.getBookingsByUserId(userId);
     }
     
 }

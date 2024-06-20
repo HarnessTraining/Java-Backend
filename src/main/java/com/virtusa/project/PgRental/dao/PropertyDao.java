@@ -29,6 +29,7 @@ public class PropertyDao {
 
     public List<PropertyDto> getAllProperties() {
         List<Property> properties = propertyRepository.findAll();
+        System.out.println(properties);
         return properties.stream()
                 .map(property -> modelMapper.map(property, PropertyDto.class))
                 .collect(Collectors.toList());

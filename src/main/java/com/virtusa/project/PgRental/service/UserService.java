@@ -20,6 +20,9 @@ public interface UserService {
 
     public UserDTO getUserByUserName(String userName);
 
+    UserDTO approveUser(Long userId) throws Exception;
+    void disapproveUser(Long userId) throws Exception;
+
 //    UserDTO updateUser(Long id, UserDTO userDTO);
 //
 //    void deleteUser(Long id);

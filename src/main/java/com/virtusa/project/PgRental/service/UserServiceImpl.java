@@ -44,4 +44,16 @@ public class UserServiceImpl implements UserService {
         return userDao.getUserByUserName(userName);
     }
 
+    @Override
+    public UserDTO approveUser(Long userId) throws Exception {
+        UserDTO userDTO = getUserById(userId).orElseThrow(() -> new Exception("User not found"));
+        userDTO.setAdminVerified(true);
+        return updateUser(userId, userDTO);
+    }
+
+    @Override
+    public void disapproveUser(Long userId) throws Exception {
+        deleteUser(userId);
+    }
+
 }
