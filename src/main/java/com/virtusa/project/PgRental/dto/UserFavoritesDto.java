@@ -35,8 +35,4 @@ public class UserFavoritesDto {
     public void setPropertyId(long propertyId) {
         this.propertyId = propertyId;
     }
-
-   
-
-
 }

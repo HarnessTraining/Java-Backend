@@ -1,21 +1,15 @@
+package com.virtusa.project.PgRental.dto;
 
-package com.virtusa.project.PgRental.model;
-import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class User{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class UserDTO {
+
     private long userId;
-    
     private String userName;
     private String email;
     private String password;
@@ -35,22 +29,20 @@ public class User{
     private String referralCode;
     private int referralDiscount;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Property> propertyList;
-    
-    @JsonIgnore
-    @OneToMany(mappedBy = "user",cascade = CascadeType.REMOVE)
-    private List<Rating> ratings;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
-    private List<UserFavorites> userFavorites;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
-    private List<Complaints> complaints;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
-    private List<Notifications> notifications;
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+//    private List<Property> propertyList;
+//
+//    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+//    private List<Rating> ratings;
+//
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+//    private List<UserFavorites> userFavorites;
+//
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+//    private List<Complaints> complaints;
+//
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+//    private List<Notifications> notifications;
 
     public long getUserId() {
         return userId;
@@ -132,43 +124,5 @@ public class User{
         this.referralDiscount = referralDiscount;
     }
 
-    public List<Property> getPropertyList() {
-        return propertyList;
-    }
 
-    public void setPropertyList(List<Property> propertyList) {
-        this.propertyList = propertyList;
-    }
-
-    public List<Rating> getRatings() {
-        return ratings;
-    }
-
-    public void setRatings(List<Rating> ratings) {
-        this.ratings = ratings;
-    }
-
-    public List<UserFavorites> getUserFavorites() {
-        return userFavorites;
-    }
-
-    public void setUserFavorites(List<UserFavorites> userFavorites) {
-        this.userFavorites = userFavorites;
-    }
-
-    public List<Complaints> getComplaints() {
-        return complaints;
-    }
-
-    public void setComplaints(List<Complaints> complaints) {
-        this.complaints = complaints;
-    }
-
-    public List<Notifications> getNotifications() {
-        return notifications;
-    }
-
-    public void setNotifications(List<Notifications> notifications) {
-        this.notifications = notifications;
-    }
 }

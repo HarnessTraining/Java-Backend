@@ -1,29 +1,28 @@
 package com.virtusa.project.PgRental.service;
 
-import com.virtusa.project.PgRental.model.User;
-import com.virtusa.project.PgRental.repository.UserRepo;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import com.virtusa.project.PgRental.dto.UserDTO;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
-public class UserService {
+public interface UserService {
+    public UserDTO createUser(UserDTO userDTO);
 
-    private final UserRepo userRepository;
+    List<UserDTO> getAllUsers();
 
-    @Autowired
-    public UserService(UserRepo userRepository) {
-        this.userRepository = userRepository;
-    }
+    Optional<UserDTO> getUserById(Long id);
 
-    public User getUserById(Long id) {
-        return userRepository.findById(id).orElse(null);
-    }
-    
-    // You can modify this method to return just the user ID if needed
-    public Long getUserId(Long id) {
-        User user = userRepository.findById(id).orElse(null);
-        return (user != null) ? user.getUserId() : null;
-    }
+    UserDTO updateUser(Long id, UserDTO userDTO);
 
+    void deleteUser(Long id);
+
+    public UserDTO getUserByUserName(String userName);
+
+//    UserDTO updateUser(Long id, UserDTO userDTO);
+//
+//    void deleteUser(Long id);
+//
+//    Collection<Object> getAllUsers();
 }

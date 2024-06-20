@@ -16,7 +16,11 @@ public class Property {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long propertyId;
     private String pgName;
-    private String pgType;
+
+    @Enumerated(EnumType.STRING)
+    @Column( nullable = false)
+    private PgType pgType;
+    //private String pgType;
 
     private String pgAddress;
 
@@ -24,28 +28,26 @@ public class Property {
 
     private String pgEmail;
 
-    private int numberOfRooms;
-
     private boolean isApproved;
 
     @ManyToOne
-    @JoinColumn(name = "userId")
     private User user;
-    @OneToMany(mappedBy = "property", cascade = CascadeType.REMOVE)
+
+    @OneToMany(mappedBy = "property", cascade = CascadeType.ALL)
     private List<Complaints> complaints;
 
-    @OneToMany(mappedBy = "property",cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "property",cascade = CascadeType.ALL)
     private List<PgFacilities> pgFacilities;
 
-    @OneToMany(mappedBy = "property",cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "property",cascade = CascadeType.ALL)
     private List<Room> rooms;
 
-    @OneToMany(mappedBy = "property", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "property", cascade = CascadeType.ALL)
     private List<PropertyPhotos> propertyPhotos;
 
-    @OneToMany(mappedBy = "property",cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "property",cascade = CascadeType.ALL)
     private List<Rating> ratings;
 
-    @OneToMany(mappedBy = "property", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "property", cascade = CascadeType.ALL)
     private List<UserFavorites> userFavorites;
 }
