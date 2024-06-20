@@ -1,4 +1,4 @@
-package com.virtusa.project.PgRental.service;
+package com.virtusa.project.PgRental.service.impl;
 
 import com.virtusa.project.PgRental.model.CustomUserDetails;
 import com.virtusa.project.PgRental.model.User;

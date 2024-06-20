@@ -3,7 +3,7 @@ package com.virtusa.project.PgRental.controller;
 import com.virtusa.project.PgRental.dto.BookingDto;
 import com.virtusa.project.PgRental.model.CustomUserDetails;
 import com.virtusa.project.PgRental.service.BookingService;
-import com.virtusa.project.PgRental.service.CustomUserDetailsService;
+import com.virtusa.project.PgRental.service.impl.CustomUserDetailsService;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
