@@ -26,10 +26,9 @@ public class PropertyController {
         this.propertyService = propertyService;
     }
 
-
-
     @GetMapping("/{propertyId}")
-    public ResponseEntity<PropertyDto> getPropertyById(@PathVariable long propertyId) throws ChangeSetPersister.NotFoundException {
+    public ResponseEntity<PropertyDto> getPropertyById(@PathVariable long propertyId)
+            throws ChangeSetPersister.NotFoundException {
         PropertyDto propertyDto = propertyService.getPropertyById(propertyId);
 
         if (propertyDto != null) {
@@ -48,24 +47,28 @@ public class PropertyController {
     @PostMapping("/addProperty")
     public ResponseEntity<PropertyDto> createProperty(@RequestBody PropertyDto propertyDto) {
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName();
-        CustomUserDetails userDetails = (CustomUserDetails) customUserDetailsService.loadUserByUsername(username);
+        // Authentication authentication =
+        // SecurityContextHolder.getContext().getAuthentication();
+        // String username = authentication.getName();
+        // CustomUserDetails userDetails = (CustomUserDetails)
+        // customUserDetailsService.loadUserByUsername(username);
 
-        propertyDto.setUserId(userDetails.getUserId());
+        // propertyDto.setUserId(userDetails.getUserId());
         PropertyDto createdPropertyDto = propertyService.createProperty(propertyDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdPropertyDto);
     }
 
     @PutMapping("/{propertyId}")
-    public ResponseEntity<PropertyDto> updateProperty(@PathVariable long propertyId, @RequestBody PropertyDto propertyDto) throws ChangeSetPersister.NotFoundException {
+    public ResponseEntity<PropertyDto> updateProperty(@PathVariable long propertyId,
+            @RequestBody PropertyDto propertyDto) throws ChangeSetPersister.NotFoundException {
         propertyDto.setPropertyId(propertyId); // Ensure ID consistency
         PropertyDto updatedPropertyDto = propertyService.updateProperty(propertyDto);
         return ResponseEntity.ok(updatedPropertyDto);
     }
 
     @DeleteMapping("/{propertyId}")
-    public ResponseEntity<Void> deleteProperty(@PathVariable long propertyId) throws ChangeSetPersister.NotFoundException {
+    public ResponseEntity<Void> deleteProperty(@PathVariable long propertyId)
+            throws ChangeSetPersister.NotFoundException {
         propertyService.deleteProperty(propertyId);
         return ResponseEntity.noContent().build();
     }

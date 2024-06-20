@@ -30,10 +30,16 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable()) // Disable CSRF for simplicity
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(HttpMethod.POST, "/users").permitAll() // Allow POST /users without authentication
-                        .requestMatchers(HttpMethod.POST, "/auth/login").permitAll() // Allow access to login endpoint
-                        .anyRequest().authenticated()
-                )
+                        .requestMatchers(HttpMethod.POST, "/users", "/properties/addProperty").permitAll() // Allow POST
+                                                                                                           // /users
+                                                                                                           // without
+                                                                                                           // authentication
+                        .requestMatchers(HttpMethod.POST, "/auth/login", "/properties/addProperty").permitAll() // Allow
+                                                                                                                // access
+                                                                                                                // to
+                                                                                                                // login
+                                                                                                                // endpoint
+                        .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .httpBasic(withDefaults())
                 .formLogin(withDefaults());
@@ -47,7 +53,8 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
+            throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 }

@@ -28,8 +28,6 @@ public class Property {
 
     private String pgEmail;
 
-
-
     private boolean isApproved;
 
     @ManyToOne
