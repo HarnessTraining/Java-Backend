@@ -11,4 +11,6 @@ public interface PropertyService {
     PropertyDto createProperty(PropertyDto propertyDto);
     PropertyDto updateProperty(PropertyDto propertyDto) throws ChangeSetPersister.NotFoundException;
     void deleteProperty(long propertyId) throws ChangeSetPersister.NotFoundException;
+    PropertyDto approveProperty(long propertyId) throws ChangeSetPersister.NotFoundException;
+    void disapproveProperty(long propertyId) throws ChangeSetPersister.NotFoundException;
 }

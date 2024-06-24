@@ -17,6 +17,8 @@ public class PropertyController {
         this.propertyService = propertyService;
     }
 
+
+
     @GetMapping("/{propertyId}")
     public ResponseEntity<PropertyDto> getPropertyById(@PathVariable long propertyId)
             throws ChangeSetPersister.NotFoundException {
@@ -29,7 +31,7 @@ public class PropertyController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/gett")
     public ResponseEntity<List<PropertyDto>> getAllProperties() {
         List<PropertyDto> propertyDtos = propertyService.getAllProperties();
         return ResponseEntity.ok(propertyDtos);

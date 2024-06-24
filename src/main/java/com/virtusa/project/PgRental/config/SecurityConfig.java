@@ -1,6 +1,7 @@
 package com.virtusa.project.PgRental.config;
 
-import com.virtusa.project.PgRental.service.impl.CustomUserDetailsService;
+import com.virtusa.project.PgRental.jwt.AuthEntryPointJwt;
+import com.virtusa.project.PgRental.jwt.AuthTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +15,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
@@ -28,7 +30,12 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class SecurityConfig {
 
     @Autowired
-    private CustomUserDetailsService customUserDetailsService;
+    private AuthEntryPointJwt unauthorizedHandler;
+
+    @Bean
+    public AuthTokenFilter authenticationJwtTokenFilter(){
+        return new AuthTokenFilter();
+    }
 
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
@@ -36,29 +43,25 @@ public class SecurityConfig {
                 .cors(withDefaults())
                 .csrf(csrf -> csrf.disable()) // Disable CSRF for simplicity
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(HttpMethod.POST, "/users", "/properties/addProperty").permitAll() // Allow POST
-                                                                                                           // /users
-                                                                                                           // without
-                                                                                                           // authentication
-                        .requestMatchers(HttpMethod.POST, "/auth/login", "/properties/addProperty").permitAll() // Allow
-                                                                                                                // access
-                                                                                                                // to
-                                                                                                                // login
-                                                                                                                // endpoint
+                        .requestMatchers(HttpMethod.POST, "/users", "/properties/addProperty").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/auth/login", "/properties/addProperty","/auth/signin","/auth/validate").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .httpBasic(withDefaults())
-                .formLogin(withDefaults());
-
+                .exceptionHandling(exception->exception.authenticationEntryPoint(unauthorizedHandler));
+        http.headers(headers->headers
+                .frameOptions(frameOptions->frameOptions.sameOrigin()));
+        http.addFilterBefore(authenticationJwtTokenFilter(),
+                UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
+
 
     @Bean
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.setAllowedOriginPatterns(Arrays.asList("http://127.0.0.1:5500", "http://localhost:5500")); // Allow frontend origin
+        config.setAllowedOriginPatterns(Arrays.asList("http://localhost:3000")); // Allow frontend origin
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
         source.registerCorsConfiguration("/**", config);
@@ -71,8 +74,8 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration builder)
             throws Exception {
-        return authenticationConfiguration.getAuthenticationManager();
+        return builder.getAuthenticationManager();
     }
 }

@@ -19,7 +19,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000") // Allow only your frontend origin
 public class UserController {
 
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
