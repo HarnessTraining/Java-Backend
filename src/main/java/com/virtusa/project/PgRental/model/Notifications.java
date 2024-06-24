@@ -22,4 +22,44 @@ public class Notifications {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    public long getNotificationId() {
+        return notificationId;
+    }
+
+    public void setNotificationId(long notificationId) {
+        this.notificationId = notificationId;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public boolean isRead() {
+        return isRead;
+    }
+
+    public void setRead(boolean read) {
+        isRead = read;
+    }
+
+    public Timestamp getNotificationDate() {
+        return notificationDate;
+    }
+
+    public void setNotificationDate(Timestamp notificationDate) {
+        this.notificationDate = notificationDate;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

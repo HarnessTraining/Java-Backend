@@ -19,6 +19,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin(origins = "http://localhost:3000") // Allow only your frontend origin
 public class UserController {
 
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
@@ -53,7 +54,6 @@ public class UserController {
 
             return "User: " + userDetails.getUsername() + ", Roles: " + roles.toString();
         }
-
         return "User not authenticated.";
     }
 
