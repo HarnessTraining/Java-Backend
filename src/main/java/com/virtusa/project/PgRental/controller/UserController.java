@@ -39,7 +39,7 @@ public class UserController {
         }
     }
     
-    @GetMapping("/http://localhost:8080/users/2")
+    @GetMapping("/current")
     public String getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 

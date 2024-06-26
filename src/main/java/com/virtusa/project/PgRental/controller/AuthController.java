@@ -83,8 +83,11 @@ public class AuthController {
         String roles = userDetails.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(","));
-
-        LoginResponse response = new LoginResponse(jwtToken,userDetails.getUsername(),roles);
+        
+        UserDTO userDTO2 = userService.getUserByUserName(userDetails.getUsername());
+        System.out.println(userDTO2);
+        
+        LoginResponse response = new LoginResponse(jwtToken,userDetails.getUsername(),roles,userDTO2.getUserId());
 
         return ResponseEntity.ok(response);
     }
