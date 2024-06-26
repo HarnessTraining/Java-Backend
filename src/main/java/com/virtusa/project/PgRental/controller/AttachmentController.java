@@ -1,15 +1,18 @@
 package com.virtusa.project.PgRental.controller;
 
+import com.virtusa.project.PgRental.dao.AttachmentDao;
+import com.virtusa.project.PgRental.dto.AttachmentDto;
+import com.virtusa.project.PgRental.service.AttachmentService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.virtusa.project.PgRental.dto.AttachmentDto;
-import com.virtusa.project.PgRental.service.AttachmentService;
-import com.virtusa.project.PgRental.dao.AttachmentDao;
-
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class AttachmentController {
 
     private final AttachmentService attachmentService;
@@ -21,14 +24,18 @@ public class AttachmentController {
     }
 
     @PostMapping("/upload")
-    public AttachmentDto uploadData(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<String> uploadData(@RequestParam("file") MultipartFile file, @RequestParam("propertyId") Long propertyId) {
         try {
-            attachmentDao.createAttachment(file);
+            AttachmentDto attachmentDto = new AttachmentDto();
+            attachmentDto.setPropertyDto(propertyId);
+            // Set other fields of attachmentDto if needed
+            attachmentDao.createAttachment(file, attachmentDto);
             String downloadURL = "http://localhost:8080/download/" + file.getOriginalFilename();
-            return new AttachmentDto(file.getOriginalFilename(), downloadURL, file.getContentType(), file.getSize());
+
+            return ResponseEntity.ok("File uploaded successfully");
         } catch (Exception e) {
             e.printStackTrace();
-            return new AttachmentDto(null, null, null, 0L);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload file");
         }
     }
 }

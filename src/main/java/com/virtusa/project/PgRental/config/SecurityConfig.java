@@ -33,28 +33,26 @@ public class SecurityConfig {
     private AuthEntryPointJwt unauthorizedHandler;
 
     @Bean
-    public AuthTokenFilter authenticationJwtTokenFilter(){
+    public AuthTokenFilter authenticationJwtTokenFilter() {
         return new AuthTokenFilter();
     }
 
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http
-                .cors(withDefaults())
+                .cors(withDefaults()) // Enable CORS
                 .csrf(csrf -> csrf.disable()) // Disable CSRF for simplicity
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(HttpMethod.POST, "/users", "/properties/addProperty").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/auth/login","/auth/signin","/auth/validate").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/users", "/properties/addProperty","/pgfacilities").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/auth/login", "/auth/signin", "/auth/validate").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .exceptionHandling(exception->exception.authenticationEntryPoint(unauthorizedHandler));
-        http.headers(headers->headers
-                .frameOptions(frameOptions->frameOptions.sameOrigin()));
-        http.addFilterBefore(authenticationJwtTokenFilter(),
-                UsernamePasswordAuthenticationFilter.class);
+                .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler));
+
+        http.headers(headers -> headers.frameOptions(frameOptions -> frameOptions.sameOrigin()));
+        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
-
 
     @Bean
     public CorsFilter corsFilter() {
@@ -63,7 +61,7 @@ public class SecurityConfig {
         config.setAllowCredentials(true);
         config.setAllowedOriginPatterns(Arrays.asList("http://localhost:3000")); // Allow frontend origin
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        config.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
+        config.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type","headers"));
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }

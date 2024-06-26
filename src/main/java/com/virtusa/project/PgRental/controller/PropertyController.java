@@ -1,7 +1,9 @@
 package com.virtusa.project.PgRental.controller;
 
 import com.virtusa.project.PgRental.dto.PropertyDto;
+import com.virtusa.project.PgRental.jwt.JwtUtils;
 import com.virtusa.project.PgRental.service.PropertyService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +13,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/properties")
+@CrossOrigin(origins = "http://localhost:3000") // Allow only your frontend origin
 public class PropertyController {
+    @Autowired
+    private JwtUtils jwtUtils;
     private final PropertyService propertyService;
 
 
@@ -40,8 +45,11 @@ public class PropertyController {
     }
 
     @PostMapping("/addProperty")
-    public ResponseEntity<PropertyDto> createProperty(@RequestBody PropertyDto propertyDto) {
-
+    public ResponseEntity<PropertyDto> createProperty(@RequestHeader("Authorization") String token,@RequestBody PropertyDto propertyDto) {
+        String jwtToken = token.substring(7);
+        Long userId = jwtUtils.getUserIdFromJwtToken(jwtToken);
+        System.out.println(userId);
+        propertyDto.setUserId(userId);
         PropertyDto createdPropertyDto = propertyService.createProperty(propertyDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdPropertyDto);
     }

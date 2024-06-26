@@ -4,10 +4,6 @@ import com.virtusa.project.PgRental.dto.UserDTO;
 import com.virtusa.project.PgRental.jwt.JwtUtils;
 import com.virtusa.project.PgRental.jwt.LoginResponse;
 import com.virtusa.project.PgRental.service.UserService;
-
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -77,14 +73,14 @@ public class AuthController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        UserDTO userDTO2 = userService.getUserByUserName(userDetails.getUsername());
 
-        String jwtToken = jwtUtils.generateTokenFromUsername(userDetails);
+        String jwtToken = jwtUtils.generateTokenFromUsername(userDetails,userDTO2.getUserId());
 
         String roles = userDetails.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(","));
         
-        UserDTO userDTO2 = userService.getUserByUserName(userDetails.getUsername());
         System.out.println(userDTO2);
         
         LoginResponse response = new LoginResponse(jwtToken,userDetails.getUsername(),roles,userDTO2.getUserId());

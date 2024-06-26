@@ -66,4 +66,36 @@ public class RatingDao {
     public List<Rating> getRatingsByUserId(Long userId) {
         return ratingRepo.findByUserUserId(userId);
     }
+
+    public PropertyRepo getPropertyRepo() {
+        return propertyRepo;
+    }
+
+    public void setPropertyRepo(PropertyRepo propertyRepo) {
+        this.propertyRepo = propertyRepo;
+    }
+
+    public UserRepo getUserRepo() {
+        return userRepo;
+    }
+
+    public void setUserRepo(UserRepo userRepo) {
+        this.userRepo = userRepo;
+    }
+
+    public RatingRepo getRatingRepo() {
+        return ratingRepo;
+    }
+
+    public void setRatingRepo(RatingRepo ratingRepo) {
+        this.ratingRepo = ratingRepo;
+    }
+
+    public ModelMapper getModelMapper() {
+        return modelMapper;
+    }
+
+    public void setModelMapper(ModelMapper modelMapper) {
+        this.modelMapper = modelMapper;
+    }
 }
