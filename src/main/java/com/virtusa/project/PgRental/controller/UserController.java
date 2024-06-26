@@ -39,7 +39,7 @@ public class UserController {
         }
     }
     
-    @GetMapping("/current-user")
+    @GetMapping("/current")
     public String getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
@@ -58,6 +58,7 @@ public class UserController {
     }
 
     @GetMapping
+    @CrossOrigin("http://127.0.0.1:5500")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<List<UserDTO>> getAllUsers() {
         List<UserDTO> users = userService.getAllUsers();

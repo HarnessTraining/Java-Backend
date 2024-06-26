@@ -29,4 +29,51 @@ public class PgFacilities {
     @JoinColumn(name = "facilityId")
     private Facilities facilities;
 
+    public long getPgFacilitiesId() {
+        return pgFacilitiesId;
+    }
+
+    public void setPgFacilitiesId(long pgFacilitiesId) {
+        this.pgFacilitiesId = pgFacilitiesId;
+    }
+
+    public BigDecimal getCost() {
+        return cost;
+    }
+
+    public void setCost(BigDecimal cost) {
+        this.cost = cost;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public Property getProperty() {
+        return property;
+    }
+
+    public void setProperty(Property property) {
+        this.property = property;
+    }
+
+    public Facilities getFacilities() {
+        return facilities;
+    }
+
+    public void setFacilities(Facilities facilities) {
+        this.facilities = facilities;
+    }
 }

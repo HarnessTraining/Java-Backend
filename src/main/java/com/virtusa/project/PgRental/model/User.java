@@ -49,6 +49,7 @@ public class User{
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Complaints> complaints;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Notifications> notifications;
 
