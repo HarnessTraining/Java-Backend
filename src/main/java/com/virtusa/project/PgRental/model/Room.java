@@ -16,6 +16,8 @@ public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long roomId;
+
+    @Column(unique=true)
     private long roomNumber;
 
     @Enumerated(EnumType.STRING)

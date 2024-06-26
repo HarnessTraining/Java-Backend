@@ -8,9 +8,9 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class User{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,6 +49,7 @@ public class User{
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Complaints> complaints;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Notifications> notifications;
 
