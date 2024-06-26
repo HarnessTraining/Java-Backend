@@ -13,6 +13,8 @@ import java.util.List;
 @RequestMapping("/properties")
 public class PropertyController {
     private final PropertyService propertyService;
+
+
     public PropertyController(PropertyService propertyService) {
         this.propertyService = propertyService;
     }
@@ -38,13 +40,6 @@ public class PropertyController {
     @PostMapping("/addProperty")
     public ResponseEntity<PropertyDto> createProperty(@RequestBody PropertyDto propertyDto) {
 
-        // Authentication authentication =
-        // SecurityContextHolder.getContext().getAuthentication();
-        // String username = authentication.getName();
-        // CustomUserDetails userDetails = (CustomUserDetails)
-        // customUserDetailsService.loadUserByUsername(username);
-
-        // propertyDto.setUserId(userDetails.getUserId());
         PropertyDto createdPropertyDto = propertyService.createProperty(propertyDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdPropertyDto);
     }
@@ -52,7 +47,7 @@ public class PropertyController {
     @PutMapping("/{propertyId}")
     public ResponseEntity<PropertyDto> updateProperty(@PathVariable long propertyId,
             @RequestBody PropertyDto propertyDto) throws ChangeSetPersister.NotFoundException {
-        propertyDto.setPropertyId(propertyId); // Ensure ID consistency
+        propertyDto.setPropertyId(propertyId);
         PropertyDto updatedPropertyDto = propertyService.updateProperty(propertyDto);
         return ResponseEntity.ok(updatedPropertyDto);
     }

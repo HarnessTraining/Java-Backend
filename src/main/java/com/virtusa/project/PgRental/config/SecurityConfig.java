@@ -44,7 +44,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable()) // Disable CSRF for simplicity
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/users", "/properties/addProperty").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/auth/login", "/properties/addProperty","/auth/signin","/auth/validate").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/auth/login","/auth/signin","/auth/validate").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .exceptionHandling(exception->exception.authenticationEntryPoint(unauthorizedHandler));

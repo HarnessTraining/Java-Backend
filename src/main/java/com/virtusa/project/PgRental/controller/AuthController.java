@@ -81,7 +81,6 @@ public class AuthController {
                 .collect(Collectors.joining(","));
 
         LoginResponse response = new LoginResponse(jwtToken,userDetails.getUsername(),roles);
-
         return ResponseEntity.ok(response);
     }
 
