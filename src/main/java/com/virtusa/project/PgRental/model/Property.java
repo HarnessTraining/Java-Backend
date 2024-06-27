@@ -36,7 +36,7 @@ public class Property {
     @OneToMany(mappedBy = "property", cascade = CascadeType.ALL)
     private List<Complaints> complaints;
 
-    @OneToMany(mappedBy = "property",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "property",cascade = CascadeType.REMOVE)
     private List<PgFacilities> pgFacilities;
 
     @OneToMany(mappedBy = "property",cascade = CascadeType.ALL)

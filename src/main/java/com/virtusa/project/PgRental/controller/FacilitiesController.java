@@ -17,6 +17,7 @@ public class FacilitiesController {
 
     @PostMapping
     public ResponseEntity<Void> createFacility(@RequestBody FacilitiesDto facilitiesDto) {
+        System.out.println(facilitiesDto);
         facilitiesService.createFacility(facilitiesDto);
         return ResponseEntity.ok().build();
     }

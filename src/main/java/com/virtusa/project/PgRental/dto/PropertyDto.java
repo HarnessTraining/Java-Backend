@@ -3,12 +3,10 @@ package com.virtusa.project.PgRental.dto;
 import com.virtusa.project.PgRental.model.PgType;
 import com.virtusa.project.PgRental.model.PropertyPhotos;
 import lombok.Data;
-import lombok.ToString;
 
 import java.util.List;
 
 @Data
-@ToString
 public class PropertyDto {
     private long propertyId;
     private String pgName;

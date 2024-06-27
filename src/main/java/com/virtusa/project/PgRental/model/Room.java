@@ -17,7 +17,6 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long roomId;
 
-    @Column(unique=true)
     private long roomNumber;
 
     @Enumerated(EnumType.STRING)
@@ -33,6 +32,6 @@ public class Room {
     private boolean available;
 
     @ManyToOne
-//    @JoinColumn(name = "propertyId")
+    @JoinColumn(name = "propertyId")
     private Property property;
 }
