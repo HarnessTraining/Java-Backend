@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class PropertyPhotos {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int photoId;
+    private long photoId;
     private String photoFileName;
 
     @ManyToOne
