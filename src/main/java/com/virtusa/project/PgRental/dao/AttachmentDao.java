@@ -3,6 +3,7 @@ package com.virtusa.project.PgRental.dao;
 import com.virtusa.project.PgRental.dto.AttachmentDto;
 import com.virtusa.project.PgRental.model.Attachment;
 import com.virtusa.project.PgRental.repository.AttachmentRepository;
+import com.virtusa.project.PgRental.repository.PropertyRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -19,13 +20,17 @@ public class AttachmentDao {
     private AttachmentRepository attachmentRepository;
 
     @Autowired
+    private PropertyRepository propertyRepository;
+
+    @Autowired
     private ModelMapper modelMapper;
 
-    public void createAttachment(MultipartFile file) throws Exception {
+    public void createAttachment(MultipartFile file,AttachmentDto attachmentDto) throws Exception {
         Attachment attachment = new Attachment();
         attachment.setFileName(file.getOriginalFilename());
         attachment.setFileType(file.getContentType());
         attachment.setData(file.getBytes());
+        attachment.setProperty(propertyRepository.findById(attachmentDto.getPropertyId()).get());
         attachmentRepository.save(attachment);
     }
 

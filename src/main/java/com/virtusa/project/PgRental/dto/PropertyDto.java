@@ -1,13 +1,12 @@
 package com.virtusa.project.PgRental.dto;
 
 import com.virtusa.project.PgRental.model.PgType;
+import com.virtusa.project.PgRental.model.PropertyPhotos;
 import lombok.Data;
-import lombok.ToString;
 
 import java.util.List;
 
 @Data
-@ToString
 public class PropertyDto {
     private long propertyId;
     private String pgName;
@@ -19,9 +18,27 @@ public class PropertyDto {
     private boolean isApproved;
     private long userId;
 
-
-
     private List<RoomDto> rooms;
+
+    private List<PgFacilitiesDto> pgFacilities;
+
+    private List<PropertyPhotos> propertyPhotos;
+
+    public List<PgFacilitiesDto> getPgFacilities() {
+        return pgFacilities;
+    }
+
+    public void setPgFacilities(List<PgFacilitiesDto> pgFacilitiesDto) {
+        this.pgFacilities = pgFacilitiesDto;
+    }
+
+    public List<PropertyPhotos> getPropertyPhotos() {
+        return propertyPhotos;
+    }
+
+    public void setPropertyPhotos(List<PropertyPhotos> propertyPhotos) {
+        this.propertyPhotos = propertyPhotos;
+    }
 
     public List<RoomDto> getRooms() {
         return rooms;

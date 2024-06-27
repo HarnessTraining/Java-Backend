@@ -1,6 +1,8 @@
 package com.virtusa.project.PgRental.dao;
 
+import com.virtusa.project.PgRental.dto.FacilitiesDto;
 import com.virtusa.project.PgRental.dto.PgFacilitiesDto;
+import com.virtusa.project.PgRental.dto.PropertyDto;
 import com.virtusa.project.PgRental.model.PgFacilities;
 import com.virtusa.project.PgRental.repository.PgFacilitiesRepository;
 import com.virtusa.project.PgRental.repository.PropertyRepository;
@@ -37,8 +39,8 @@ public class PgFacilitiesDao {
         PgFacilities pgFacilities = pgFacilitiesRepository.findById(pgFacilitiesDto.getPgFacilitiesId()).orElse(null);
         if (pgFacilities != null) {
             pgFacilities = modelMapper.map(pgFacilitiesDto, PgFacilities.class);
-            pgFacilities.setProperty(propertyRepository.findById(pgFacilitiesDto.getPropertyId()).orElse(null));
-            pgFacilities.setFacilities(facilitiesRepository.findById(pgFacilitiesDto.getFacilityId()).orElse(null));
+            pgFacilities.setProperty(propertyRepository.findById(pgFacilitiesDto.getProperty().getPropertyId()).orElse(null));
+            pgFacilities.setFacilities(facilitiesRepository.findById(pgFacilitiesDto.getFacilities().getFacilityId()).orElse(null));
             pgFacilitiesRepository.save(pgFacilities);
         }
     }
@@ -47,8 +49,8 @@ public class PgFacilitiesDao {
         Optional<PgFacilities> pgFacilities = pgFacilitiesRepository.findById(pgFacilitiesId);
         return pgFacilities.map(f -> {
             PgFacilitiesDto pgFacilitiesDto = modelMapper.map(f, PgFacilitiesDto.class);
-            pgFacilitiesDto.setPropertyId(f.getProperty() != null ? f.getProperty().getPropertyId() : 0);
-            pgFacilitiesDto.setFacilityId(f.getFacilities() != null ? f.getFacilities().getFacilityId() : 0);
+            pgFacilitiesDto.setProperty(modelMapper.map(f.getProperty(), PropertyDto.class));
+            pgFacilitiesDto.setFacilities(modelMapper.map(f.getFacilities(), FacilitiesDto.class));
             return pgFacilitiesDto;
         }).orElse(null);
     }
@@ -62,8 +64,8 @@ public class PgFacilitiesDao {
         List<PgFacilitiesDto> pgFacilitiesDtoList = new ArrayList<>();
         for (PgFacilities pgFacilities : pgFacilitiesList) {
             PgFacilitiesDto pgFacilitiesDto = modelMapper.map(pgFacilities, PgFacilitiesDto.class);
-            pgFacilitiesDto.setPropertyId(pgFacilities.getProperty() != null ? pgFacilities.getProperty().getPropertyId() : 0);
-            pgFacilitiesDto.setFacilityId(pgFacilities.getFacilities() != null ? pgFacilities.getFacilities().getFacilityId() : 0);
+            pgFacilitiesDto.setProperty(modelMapper.map(pgFacilities.getProperty(), PropertyDto.class));
+            pgFacilitiesDto.setFacilities(modelMapper.map(pgFacilities.getFacilities(), FacilitiesDto.class));
             pgFacilitiesDtoList.add(pgFacilitiesDto);
         }
         return pgFacilitiesDtoList;
