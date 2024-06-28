@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -22,11 +24,60 @@ public class PgFacilities {
     private Date endDate;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "propertyId")
     private Property property;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "facilityId")
     private Facilities facilities;
 
+    public long getPgFacilitiesId() {
+        return pgFacilitiesId;
+    }
+
+    public void setPgFacilitiesId(long pgFacilitiesId) {
+        this.pgFacilitiesId = pgFacilitiesId;
+    }
+
+    public BigDecimal getCost() {
+        return cost;
+    }
+
+    public void setCost(BigDecimal cost) {
+        this.cost = cost;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public Property getProperty() {
+        return property;
+    }
+
+    public void setProperty(Property property) {
+        this.property = property;
+    }
+
+    public Facilities getFacilities() {
+        return facilities;
+    }
+
+    public void setFacilities(Facilities facilities) {
+        this.facilities = facilities;
+    }
 }

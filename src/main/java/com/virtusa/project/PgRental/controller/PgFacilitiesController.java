@@ -1,25 +1,27 @@
 package com.virtusa.project.PgRental.controller;
+
 import com.virtusa.project.PgRental.dto.PgFacilitiesDto;
 import com.virtusa.project.PgRental.service.PgFacilitiesService;
-
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
 @RequestMapping("/pgfacilities")
+@CrossOrigin(origins = "http://localhost:3000")
 public class PgFacilitiesController {
 
     @Autowired
     private PgFacilitiesService pgFacilitiesService;
 
     @PostMapping
-    public ResponseEntity<Void> createPgFacilities(@RequestBody PgFacilitiesDto pgFacilitiesDto) {
+    public ResponseEntity<PgFacilitiesDto> createPgFacilities(@RequestBody PgFacilitiesDto pgFacilitiesDto) {
         pgFacilitiesService.createPgFacilities(pgFacilitiesDto);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(pgFacilitiesDto);
     }
 
     @PutMapping("/{id}")

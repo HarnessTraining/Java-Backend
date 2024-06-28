@@ -37,10 +37,11 @@ public class JwtUtils {
         return null;
     }
 
-    public String generateTokenFromUsername(UserDetails userDetails){
+    public String generateTokenFromUsername(UserDetails userDetails,Long userId){
         String username = userDetails.getUsername();
         return Jwts.builder()
                 .subject(username)
+                .claim("userId",userId)
                 .issuedAt(new Date())
                 .expiration(new Date((new Date()).getTime()+jwtExpirationsMs))
                 .signWith(key())
@@ -56,6 +57,12 @@ public class JwtUtils {
                 verifyWith((SecretKey) key())
                 .build().parseSignedClaims(token)
                 .getPayload().getSubject();
+    }
+    public Long getUserIdFromJwtToken(String token){
+        return Jwts.parser()
+                .verifyWith((SecretKey) key())
+                .build().parseSignedClaims(token).getPayload()
+                .get("userId", Long.class);
     }
 
     public boolean validateJwtToken(String authToken){

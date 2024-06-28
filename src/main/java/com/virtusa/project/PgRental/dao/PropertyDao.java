@@ -2,8 +2,10 @@ package com.virtusa.project.PgRental.dao;
 
 import com.virtusa.project.PgRental.dto.PropertyDto;
 import com.virtusa.project.PgRental.model.Property;
+import com.virtusa.project.PgRental.repository.PgFacilitiesRepository;
 import com.virtusa.project.PgRental.repository.PropertyRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Repository;
@@ -15,6 +17,8 @@ import java.util.stream.Collectors;
 public class PropertyDao {
     private final PropertyRepository propertyRepository;
     private final ModelMapper modelMapper;
+    @Autowired
+    private PgFacilitiesRepository pgFacilitiesRepository;
 
     public PropertyDao(PropertyRepository propertyRepository, ModelMapper modelMapper) {
         this.propertyRepository = propertyRepository;
@@ -37,7 +41,12 @@ public class PropertyDao {
 
     public PropertyDto saveProperty(PropertyDto propertyDto) {
         Property property = modelMapper.map(propertyDto, Property.class);
+        System.out.println(property);
+//        for (PgFacilities f: property.getPgFacilities()){
+//            pgFacilitiesRepository.save(f);
+//        }
         property = propertyRepository.save(property);
+
         return modelMapper.map(property, PropertyDto.class);
     }
 

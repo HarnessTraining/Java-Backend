@@ -80,7 +80,8 @@ public class UserDao {
     }
 
     public UserDTO getUserByUserName(String userName) {
-        return modelMapper.map(this.userRepository.findByUserName(userName),UserDTO.class);
+        // System.out.println(userName);
+        return modelMapper.map(userRepository.findByUserName(userName).get(),UserDTO.class);
     }
 
     public List<UserDTO> findUnapprovedUsers() {

@@ -29,8 +29,7 @@ public class UserDTO {
     private String referralCode;
     private int referralDiscount;
 
-//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-//    private List<Property> propertyList;
+//       private List<PropertyDto> propertyList;
 //
 //    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
 //    private List<Rating> ratings;

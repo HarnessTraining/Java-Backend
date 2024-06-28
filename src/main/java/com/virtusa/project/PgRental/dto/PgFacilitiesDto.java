@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,8 +16,10 @@ public class PgFacilitiesDto {
     private BigDecimal cost;
     private Date startDate;
     private Date endDate;
-    private long propertyId;
-    private long facilityId;
+    
+    @JsonIgnore
+    private PropertyDto property;
+    private FacilitiesDto facilities;
 
     public long getPgFacilitiesId() {
         return pgFacilitiesId;
@@ -49,19 +53,19 @@ public class PgFacilitiesDto {
         this.endDate = endDate;
     }
 
-    public long getPropertyId() {
-        return propertyId;
+    public PropertyDto getProperty() {
+        return property;
     }
 
-    public void setPropertyId(long propertyId) {
-        this.propertyId = propertyId;
+    public void setProperty(PropertyDto property) {
+        this.property = property;
     }
 
-    public long getFacilityId() {
-        return facilityId;
+    public FacilitiesDto getFacilities() {
+        return facilities;
     }
 
-    public void setFacilityId(long facilityId) {
-        this.facilityId = facilityId;
+    public void setFacilities(FacilitiesDto facilities) {
+        this.facilities = facilities;
     }
 }
