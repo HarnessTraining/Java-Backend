@@ -5,7 +5,6 @@ import com.virtusa.project.PgRental.model.CustomUserDetails;
 import com.virtusa.project.PgRental.service.BookingService;
 import com.virtusa.project.PgRental.service.impl.CustomUserDetailsService;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.http.ResponseEntity;
