@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -22,10 +24,12 @@ public class PgFacilities {
     private Date endDate;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "propertyId")
     private Property property;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "facilityId")
     private Facilities facilities;
 

@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,6 +16,8 @@ public class PgFacilitiesDto {
     private BigDecimal cost;
     private Date startDate;
     private Date endDate;
+    
+    @JsonIgnore
     private PropertyDto property;
     private FacilitiesDto facilities;
 

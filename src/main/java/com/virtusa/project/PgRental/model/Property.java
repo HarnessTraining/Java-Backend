@@ -7,10 +7,14 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties({"rooms"})
 public class Property {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,16 +40,19 @@ public class Property {
     @OneToMany(mappedBy = "property", cascade = CascadeType.ALL)
     private List<Complaints> complaints;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "property",cascade = CascadeType.REMOVE)
     private List<PgFacilities> pgFacilities;
 
-    @OneToMany(mappedBy = "property",cascade = CascadeType.ALL)
+    @JsonIgnore
+    @OneToMany(mappedBy = "property",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<Room> rooms;
 
-    @OneToMany(mappedBy = "property", cascade = CascadeType.ALL)
+    @JsonIgnore
+    @OneToMany(mappedBy = "property", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<PropertyPhotos> propertyPhotos;
 
-    @OneToMany(mappedBy = "property",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "property",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<Rating> ratings;
 
     @OneToMany(mappedBy = "property", cascade = CascadeType.ALL)

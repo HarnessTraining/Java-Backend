@@ -1,6 +1,7 @@
 package com.virtusa.project.PgRental.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.virtusa.project.PgRental.model.SharingType;
 import lombok.Data;
 
@@ -71,6 +72,8 @@ public class RoomDto {
     private BigDecimal price;
     private Date startDate;
     private Date endDate;
+    
+    @JsonIgnore
     private PropertyDto property;
     private boolean available;
 
