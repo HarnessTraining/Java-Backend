@@ -48,11 +48,16 @@ public class PropertyServiceImpl implements PropertyService {
     public PropertyDto approveProperty(long propertyId) throws ChangeSetPersister.NotFoundException {
         PropertyDto propertyDto = getPropertyById(propertyId);
         propertyDto.setApproved(true);
-        return updateProperty(propertyDto);
+        return propertyDao.updateProperty(propertyDto);
     }
 
     @Override
     public void disapproveProperty(long propertyId) throws ChangeSetPersister.NotFoundException {
-        deleteProperty(propertyId);
+        propertyDao.deleteProperty(propertyId);
+    }
+
+    @Override
+    public List<PropertyDto> getUnapprovedProperties() {
+        return propertyDao.findUnapprovedProperties();
     }
 }
