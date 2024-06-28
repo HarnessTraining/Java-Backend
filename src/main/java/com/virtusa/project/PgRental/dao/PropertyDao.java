@@ -54,6 +54,13 @@ public class PropertyDao {
                 .orElseThrow(() -> new NotFoundException());
         propertyRepository.delete(existingProperty);
     }
+
+    public List<PropertyDto> findUnapprovedProperties() {
+        List<Property> unapprovedProperties = propertyRepository.findByIsApproved(false);
+        return unapprovedProperties.stream()
+                .map(property -> modelMapper.map(property, PropertyDto.class))
+                .collect(Collectors.toList());
+    }
 }
 
 

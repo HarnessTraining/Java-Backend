@@ -1,6 +1,8 @@
 package com.virtusa.project.PgRental.dao;
 
+import com.virtusa.project.PgRental.dto.PropertyDto;
 import com.virtusa.project.PgRental.dto.UserDTO;
+import com.virtusa.project.PgRental.model.Property;
 import com.virtusa.project.PgRental.model.User;
 import com.virtusa.project.PgRental.repository.UserRepository;
 import org.modelmapper.ModelMapper;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserDao {
@@ -78,6 +81,20 @@ public class UserDao {
 
     public UserDTO getUserByUserName(String userName) {
         return modelMapper.map(this.userRepository.findByUserName(userName),UserDTO.class);
+    }
+
+    public List<UserDTO> findUnapprovedUsers() {
+        List<User> unapprovedUser = userRepository.findByAdminVerified(false);
+        return unapprovedUser.stream()
+                .map(user -> modelMapper.map(user, UserDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    public List<UserDTO> findapprovedUsers() {
+        List<User> approvedUser = userRepository.findByAdminVerified(true);
+        return approvedUser.stream()
+                .map(user -> modelMapper.map(user, UserDTO.class))
+                .collect(Collectors.toList());
     }
     
     
