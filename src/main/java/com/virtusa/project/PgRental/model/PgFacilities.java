@@ -78,4 +78,18 @@ public class PgFacilities {
     public void setFacilities(Facilities facilities) {
         this.facilities = facilities;
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " pgFacilitiesId='" + getPgFacilitiesId() + "'" +
+            ", cost='" + getCost() + "'" +
+            ", startDate='" + getStartDate() + "'" +
+            ", endDate='" + getEndDate() + "'" +
+            ", property='" + getProperty() + "'" +
+            ", facilities='" + getFacilities() + "'" +
+            "}";
+    }
 }
+
+   

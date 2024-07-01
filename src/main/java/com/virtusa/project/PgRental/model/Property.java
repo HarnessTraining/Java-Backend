@@ -34,22 +34,22 @@ public class Property {
     @ManyToOne
     private User user;
 
-    @OneToMany(mappedBy = "property", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "property", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<Complaints> complaints;
 
-    @OneToMany(mappedBy = "property",cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "property",cascade = CascadeType.REMOVE,fetch = FetchType.LAZY)
     private List<PgFacilities> pgFacilities;
 
-    @OneToMany(mappedBy = "property",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "property",cascade = CascadeType.REMOVE,fetch = FetchType.LAZY)
     private List<Room> rooms;
 
-    @OneToMany(mappedBy = "property", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "property", cascade = CascadeType.REMOVE,fetch = FetchType.LAZY)
     private List<Attachment> attachments;
 
-    @OneToMany(mappedBy = "property",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "property",cascade = CascadeType.REMOVE,fetch = FetchType.LAZY)
     private List<Rating> ratings;
 
-    @OneToMany(mappedBy = "property", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "property", cascade = CascadeType.REMOVE,fetch = FetchType.LAZY)
     private List<UserFavorites> userFavorites;
 
     public long getPropertyId() {
@@ -78,6 +78,28 @@ public class Property {
 
     public String getPgAddress() {
         return pgAddress;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Property{");
+        sb.append("propertyId=").append(propertyId);
+        sb.append(", pgName='").append(pgName).append('\'');
+        sb.append(", pgType=").append(pgType);
+        sb.append(", pgAddress='").append(pgAddress).append('\'');
+        sb.append(", pgPhoneNumber='").append(pgPhoneNumber).append('\'');
+        sb.append(", pgEmail='").append(pgEmail).append('\'');
+        sb.append(", isApproved=").append(isApproved);
+        sb.append(", user=").append(user != null ? user.toString() : "null");
+        sb.append(", complaints=").append(complaints != null ? complaints.size() : "null");
+        sb.append(", pgFacilities=").append(pgFacilities != null ? pgFacilities.size() : "null");
+        sb.append(", rooms=").append(rooms != null ? rooms.size() : "null");
+        sb.append(", attachmentsSize=").append(attachments != null ? attachments.size() : "null");
+        sb.append(", ratings=").append(ratings != null ? ratings.size() : "null");
+        sb.append(", userFavorites=").append(userFavorites != null ? userFavorites.size() : "null");
+        sb.append('}');
+        return sb.toString();
     }
 
     public void setPgAddress(String pgAddress) {
