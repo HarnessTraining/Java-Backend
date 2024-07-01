@@ -1,5 +1,6 @@
 package com.virtusa.project.PgRental.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,8 +8,6 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.Date;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Data
@@ -24,12 +23,11 @@ public class PgFacilities {
     private Date endDate;
 
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(name = "propertyId")
+    @JsonIgnore
     private Property property;
 
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(name = "facilityId")
     private Facilities facilities;
 

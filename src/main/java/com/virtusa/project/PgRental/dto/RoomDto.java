@@ -72,7 +72,7 @@ public class RoomDto {
     private BigDecimal price;
     private Date startDate;
     private Date endDate;
-    
+
     @JsonIgnore
     private PropertyDto property;
     private boolean available;

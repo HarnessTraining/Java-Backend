@@ -1,6 +1,7 @@
 package com.virtusa.project.PgRental.controller;
 
 import com.virtusa.project.PgRental.dto.PgFacilitiesDto;
+import com.virtusa.project.PgRental.dto.PropertyDto;
 import com.virtusa.project.PgRental.service.PgFacilitiesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,8 +19,12 @@ public class PgFacilitiesController {
     @Autowired
     private PgFacilitiesService pgFacilitiesService;
 
-    @PostMapping
-    public ResponseEntity<PgFacilitiesDto> createPgFacilities(@RequestBody PgFacilitiesDto pgFacilitiesDto) {
+    @PostMapping("/{id}")
+    public ResponseEntity<PgFacilitiesDto> createPgFacilities(@RequestBody PgFacilitiesDto pgFacilitiesDto,@PathVariable long id) {
+        System.out.println(pgFacilitiesDto);
+        PropertyDto propertyDto = new PropertyDto();
+        propertyDto.setPropertyId(id);
+        pgFacilitiesDto.setProperty(propertyDto);
         pgFacilitiesService.createPgFacilities(pgFacilitiesDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(pgFacilitiesDto);
     }

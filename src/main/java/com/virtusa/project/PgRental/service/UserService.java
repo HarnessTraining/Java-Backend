@@ -1,5 +1,6 @@
 package com.virtusa.project.PgRental.service;
 
+import com.virtusa.project.PgRental.dto.PropertyDto;
 import com.virtusa.project.PgRental.dto.UserDTO;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,8 @@ public interface UserService {
 
     UserDTO approveUser(Long userId) throws Exception;
     void disapproveUser(Long userId) throws Exception;
+    List<UserDTO> getUnapprovedUsers();
+    List<UserDTO> getApprovedUsers();
 
 //    UserDTO updateUser(Long id, UserDTO userDTO);
 //

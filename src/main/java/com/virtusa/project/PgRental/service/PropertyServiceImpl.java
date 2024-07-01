@@ -2,7 +2,7 @@ package com.virtusa.project.PgRental.service;
 
 import com.virtusa.project.PgRental.dao.PropertyDao;
 import com.virtusa.project.PgRental.dto.PropertyDto;
-import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
@@ -11,11 +11,11 @@ import java.util.List;
 @Service
 public class PropertyServiceImpl implements PropertyService {
     private final PropertyDao propertyDao;
-    private final ModelMapper modelMapper;
+    @Autowired
+    private PropertyService propertyService;
 
-    public PropertyServiceImpl(PropertyDao propertyDao, ModelMapper modelMapper) {
+    public PropertyServiceImpl(PropertyDao propertyDao) {
         this.propertyDao = propertyDao;
-        this.modelMapper = modelMapper;
     }
 
     @Override
@@ -45,14 +45,18 @@ public class PropertyServiceImpl implements PropertyService {
     }
 
     @Override
-    public PropertyDto approveProperty(long propertyId) throws ChangeSetPersister.NotFoundException {
-        PropertyDto propertyDto = getPropertyById(propertyId);
+    public PropertyDto approveProperty(PropertyDto propertyDto) throws ChangeSetPersister.NotFoundException {
         propertyDto.setApproved(true);
-        return updateProperty(propertyDto);
+        return propertyDao.updateProperty(propertyDto);
     }
 
     @Override
     public void disapproveProperty(long propertyId) throws ChangeSetPersister.NotFoundException {
-        deleteProperty(propertyId);
+        propertyDao.deleteProperty(propertyId);
+    }
+
+    @Override
+    public List<PropertyDto> getUnapprovedProperties() {
+        return propertyDao.findUnapprovedProperties();
     }
 }
