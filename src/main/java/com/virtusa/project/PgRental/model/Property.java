@@ -1,5 +1,6 @@
 package com.virtusa.project.PgRental.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,6 +12,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties({"rooms"})
 public class Property {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,16 +38,16 @@ public class Property {
     @OneToMany(mappedBy = "property", cascade = CascadeType.ALL)
     private List<Complaints> complaints;
 
-    @OneToMany(mappedBy = "property",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "property",cascade = CascadeType.REMOVE)
     private List<PgFacilities> pgFacilities;
 
-    @OneToMany(mappedBy = "property",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "property",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<Room> rooms;
 
-    @OneToMany(mappedBy = "property", cascade = CascadeType.ALL)
-    private List<PropertyPhotos> propertyPhotos;
+    @OneToMany(mappedBy = "property", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private List<Attachment> attachments;
 
-    @OneToMany(mappedBy = "property",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "property",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<Rating> ratings;
 
     @OneToMany(mappedBy = "property", cascade = CascadeType.ALL)
@@ -139,12 +141,12 @@ public class Property {
         this.rooms = rooms;
     }
 
-    public List<PropertyPhotos> getPropertyPhotos() {
-        return propertyPhotos;
+    public List<Attachment> getAttachments() {
+        return attachments;
     }
 
-    public void setPropertyPhotos(List<PropertyPhotos> propertyPhotos) {
-        this.propertyPhotos = propertyPhotos;
+    public void setAttachments(List<Attachment> attachments) {
+        this.attachments = attachments;
     }
 
     public List<Rating> getRatings() {

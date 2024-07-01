@@ -29,7 +29,8 @@ public class AdminController {
 
     @PutMapping("/approve-property/{propertyId}")
     public ResponseEntity<PropertyDto> approveProperty(@PathVariable Long propertyId) throws Exception {
-        PropertyDto approvedProperty = propertyService.approveProperty(propertyId);
+        PropertyDto propertyDto = propertyService.getPropertyById(propertyId);
+        PropertyDto approvedProperty = propertyService.approveProperty(propertyDto);
         return ResponseEntity.ok(approvedProperty);
     }
 
@@ -52,10 +53,40 @@ public class AdminController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/bookings/{userId}")
-    public ResponseEntity<List<BookingDto>> getBookingsByUserId(@PathVariable Long userId) {
-        List<BookingDto> bookingsByUser = bookingService.getBookingsByUserId(userId);
-        return ResponseEntity.ok(bookingsByUser);
+
+    @GetMapping("/Allbookings/")
+    public ResponseEntity<List<BookingDto>> getAllBookings() {
+        List<BookingDto> bookingDtoList = bookingService.getAllBookings();
+        return ResponseEntity.ok(bookingDtoList);
+    }
+
+    @GetMapping("/unapproved-properties")
+    public ResponseEntity<List<PropertyDto>> getUnapprovedProperties() {
+        List<PropertyDto> unapprovedProperties = propertyService.getUnapprovedProperties();
+        return ResponseEntity.ok(unapprovedProperties);
+    }
+    @GetMapping("/unapproved-users")
+    public ResponseEntity<List<UserDTO>> getUnapprovedUsers() {
+        List<UserDTO> unapprovedUsers = userService.getUnapprovedUsers();
+        return ResponseEntity.ok(unapprovedUsers);
+    }
+
+    @PutMapping("/update-bookings/{Id}")
+    public ResponseEntity<Void> updateBooking(@PathVariable long id, @RequestBody BookingDto bookingDto) {
+        bookingDto.setBookingId(id);
+        bookingService.updateBooking(bookingDto);
+        return ResponseEntity.ok().build();
+    }
+    @DeleteMapping("/delete-bookings/{id}")
+    public ResponseEntity<Void> deleteBooking(@PathVariable long id) {
+        bookingService.deleteBooking(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/approved-users")
+    public ResponseEntity<List<UserDTO>> getApprovedUsers() {
+        List<UserDTO> approvedUsers = userService.getApprovedUsers();
+        return ResponseEntity.ok(approvedUsers);
     }
 }
 

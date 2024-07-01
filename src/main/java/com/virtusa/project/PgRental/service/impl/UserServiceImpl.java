@@ -2,6 +2,7 @@ package com.virtusa.project.PgRental.service.impl;
 
 
 import com.virtusa.project.PgRental.dao.UserDao;
+import com.virtusa.project.PgRental.dto.PropertyDto;
 import com.virtusa.project.PgRental.dto.UserDTO;
 import com.virtusa.project.PgRental.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,12 +50,21 @@ public class UserServiceImpl implements UserService {
     public UserDTO approveUser(Long userId) throws Exception {
         UserDTO userDTO = getUserById(userId).orElseThrow(() -> new Exception("User not found"));
         userDTO.setAdminVerified(true);
-        return updateUser(userId, userDTO);
+        return userDao.updateUser(userId, userDTO);
     }
 
     @Override
     public void disapproveUser(Long userId) throws Exception {
-        deleteUser(userId);
+        userDao.deleteUser(userId);
+    }
+    @Override
+    public List<UserDTO> getUnapprovedUsers() {
+        return userDao.findUnapprovedUsers();
+    }
+
+    @Override
+    public List<UserDTO> getApprovedUsers() {
+        return userDao.findapprovedUsers();
     }
 
 }

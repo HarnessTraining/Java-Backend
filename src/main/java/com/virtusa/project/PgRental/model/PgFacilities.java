@@ -1,5 +1,6 @@
 package com.virtusa.project.PgRental.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,6 +24,7 @@ public class PgFacilities {
 
     @ManyToOne
     @JoinColumn(name = "propertyId")
+    @JsonIgnore
     private Property property;
 
     @ManyToOne

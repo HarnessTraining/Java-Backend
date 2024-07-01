@@ -24,7 +24,9 @@ public class RoomDao {
 
     public RoomDto save(RoomDto roomDto) {
         Room room = modelMapper.map(roomDto, Room.class);
+        System.out.println(room);
         Room savedRoom = roomRepository.save(room);
+        System.out.println(savedRoom);
         return modelMapper.map(savedRoom, RoomDto.class);
     }
 

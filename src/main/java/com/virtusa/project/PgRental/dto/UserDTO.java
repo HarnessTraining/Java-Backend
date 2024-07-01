@@ -1,7 +1,5 @@
 package com.virtusa.project.PgRental.dto;
 
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,7 +29,7 @@ public class UserDTO {
     private String referralCode;
     private int referralDiscount;
 
-       private List<PropertyDto> propertyList;
+//       private List<PropertyDto> propertyList;
 //
 //    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
 //    private List<Rating> ratings;

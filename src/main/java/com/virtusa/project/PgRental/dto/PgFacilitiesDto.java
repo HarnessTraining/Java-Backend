@@ -1,8 +1,10 @@
 package com.virtusa.project.PgRental.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -14,7 +16,10 @@ public class PgFacilitiesDto {
     private BigDecimal cost;
     private Date startDate;
     private Date endDate;
+
+    @JsonIgnore
     private PropertyDto property;
+
     private FacilitiesDto facilities;
 
     public long getPgFacilitiesId() {

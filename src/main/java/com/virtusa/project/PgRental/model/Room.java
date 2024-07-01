@@ -1,5 +1,7 @@
 package com.virtusa.project.PgRental.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,12 +14,12 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties({"property"})
 public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long roomId;
 
-    @Column(unique=true)
     private long roomNumber;
 
     @Enumerated(EnumType.STRING)
@@ -32,7 +34,8 @@ public class Room {
 
     private boolean available;
 
-    @ManyToOne
-//    @JoinColumn(name = "propertyId")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "propertyId")
+    @JsonIgnore
     private Property property;
 }

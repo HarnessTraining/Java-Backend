@@ -6,7 +6,6 @@ import com.virtusa.project.PgRental.repository.PgFacilitiesRepository;
 import com.virtusa.project.PgRental.repository.PropertyRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Repository;
 
@@ -51,9 +50,9 @@ public class PropertyDao {
     }
 
     public PropertyDto updateProperty(PropertyDto propertyDto) throws NotFoundException {
-        Property existingProperty = propertyRepository.findById(propertyDto.getPropertyId())
-                .orElseThrow(() -> new ChangeSetPersister.NotFoundException());
-        modelMapper.map(propertyDto, existingProperty);
+//        Property existingProperty = propertyRepository.findById(propertyDto.getPropertyId())
+//                .orElseThrow(() -> new ChangeSetPersister.NotFoundException());
+        Property existingProperty = modelMapper.map(propertyDto,Property.class);
         existingProperty = propertyRepository.save(existingProperty);
         return modelMapper.map(existingProperty, PropertyDto.class);
     }
@@ -62,6 +61,13 @@ public class PropertyDao {
         Property existingProperty = propertyRepository.findById(propertyId)
                 .orElseThrow(() -> new NotFoundException());
         propertyRepository.delete(existingProperty);
+    }
+
+    public List<PropertyDto> findUnapprovedProperties() {
+        List<Property> unapprovedProperties = propertyRepository.findByIsApproved(false);
+        return unapprovedProperties.stream()
+                .map(property -> modelMapper.map(property, PropertyDto.class))
+                .collect(Collectors.toList());
     }
 }
 
