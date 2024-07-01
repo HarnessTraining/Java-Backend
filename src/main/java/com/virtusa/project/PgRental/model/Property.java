@@ -14,7 +14,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIgnoreProperties({"rooms"})
 public class Property {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,15 +39,13 @@ public class Property {
     @OneToMany(mappedBy = "property", cascade = CascadeType.ALL)
     private List<Complaints> complaints;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "property",cascade = CascadeType.REMOVE)
     private List<PgFacilities> pgFacilities;
 
-    @JsonIgnore
+    
     @OneToMany(mappedBy = "property",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<Room> rooms;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "property", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<PropertyPhotos> propertyPhotos;
 
