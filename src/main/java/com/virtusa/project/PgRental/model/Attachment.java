@@ -71,4 +71,18 @@ public class Attachment {
     public void setData(byte[] data) {
         this.data = data;
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " id='" + getId() + "'" +
+            ", fileName='" + getFileName() + "'" +
+            ", fileType='" + getFileType() + "'" +
+            ",  propertyId=" + (property != null ? property.getPropertyId() : "null")+
+            ", data='" + getData() + "'" +
+            "}";
+    }
+
 }
+
+   

@@ -1,5 +1,7 @@
 package com.virtusa.project.PgRental.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,6 +23,7 @@ public class UserFavorites {
     private User user;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "propertyId")
     private Property property;
 }
