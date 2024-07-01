@@ -29,7 +29,8 @@ public class AdminController {
 
     @PutMapping("/approve-property/{propertyId}")
     public ResponseEntity<PropertyDto> approveProperty(@PathVariable Long propertyId) throws Exception {
-        PropertyDto approvedProperty = propertyService.approveProperty(propertyId);
+        PropertyDto propertyDto = propertyService.getPropertyById(propertyId);
+        PropertyDto approvedProperty = propertyService.approveProperty(propertyDto);
         return ResponseEntity.ok(approvedProperty);
     }
 

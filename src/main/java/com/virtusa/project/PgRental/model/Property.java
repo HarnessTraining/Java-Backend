@@ -1,14 +1,12 @@
 package com.virtusa.project.PgRental.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Data
@@ -40,17 +38,14 @@ public class Property {
     @OneToMany(mappedBy = "property", cascade = CascadeType.ALL)
     private List<Complaints> complaints;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "property",cascade = CascadeType.REMOVE)
     private List<PgFacilities> pgFacilities;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "property",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<Room> rooms;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "property", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    private List<PropertyPhotos> propertyPhotos;
+    private List<Attachment> attachments;
 
     @OneToMany(mappedBy = "property",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<Rating> ratings;
@@ -146,12 +141,12 @@ public class Property {
         this.rooms = rooms;
     }
 
-    public List<PropertyPhotos> getPropertyPhotos() {
-        return propertyPhotos;
+    public List<Attachment> getAttachments() {
+        return attachments;
     }
 
-    public void setPropertyPhotos(List<PropertyPhotos> propertyPhotos) {
-        this.propertyPhotos = propertyPhotos;
+    public void setAttachments(List<Attachment> attachments) {
+        this.attachments = attachments;
     }
 
     public List<Rating> getRatings() {

@@ -1,7 +1,6 @@
 package com.virtusa.project.PgRental.dto;
 
 import com.virtusa.project.PgRental.model.PgType;
-import com.virtusa.project.PgRental.model.PropertyPhotos;
 import lombok.Data;
 
 import java.util.List;
@@ -22,7 +21,7 @@ public class PropertyDto {
 
     private List<PgFacilitiesDto> pgFacilities;
 
-    private List<PropertyPhotos> propertyPhotos;
+    private List<AttachmentDto> attachments;
 
     public List<PgFacilitiesDto> getPgFacilities() {
         return pgFacilities;
@@ -32,12 +31,12 @@ public class PropertyDto {
         this.pgFacilities = pgFacilitiesDto;
     }
 
-    public List<PropertyPhotos> getPropertyPhotos() {
-        return propertyPhotos;
+    public List<AttachmentDto> getAttachments() {
+        return attachments;
     }
 
-    public void setPropertyPhotos(List<PropertyPhotos> propertyPhotos) {
-        this.propertyPhotos = propertyPhotos;
+    public void setAttachments(List<AttachmentDto> attachments) {
+        this.attachments = attachments;
     }
 
     public List<RoomDto> getRooms() {
