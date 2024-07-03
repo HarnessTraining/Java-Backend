@@ -3,6 +3,8 @@ package com.virtusa.project.PgRental.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.Arrays;
+
 @Entity
 @Data
 public class Attachment {
@@ -24,6 +26,17 @@ public class Attachment {
 
     public void setProperty(Property property) {
         this.property= property;
+    }
+
+    @Override
+    public String toString() {
+        return "Attachment{" +
+                "id=" + id +
+                ", fileName='" + fileName + '\'' +
+                ", fileType='" + fileType + '\'' +
+                ", propertyId=" + (property != null ? property.getPropertyId() : "null")+
+                ", data=" + Arrays.toString(data) +
+                '}';
     }
 
     public Attachment() {

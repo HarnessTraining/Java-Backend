@@ -161,7 +161,31 @@ public class Property {
         return userFavorites;
     }
 
+    @Override
+    public String toString() {
+        return "Property{" +
+                "propertyId=" + propertyId +
+                ", pgName='" + pgName + '\'' +
+                ", pgType=" + pgType +
+                ", pgAddress='" + pgAddress + '\'' +
+                ", pgPhoneNumber='" + pgPhoneNumber + '\'' +
+                ", pgEmail='" + pgEmail + '\'' +
+                ", isApproved=" + isApproved +
+                ", user=" + user +
+                ", complaints=" + complaints +
+                ", pgFacilities=" + pgFacilities +
+                ", rooms=" + rooms +
+                ", attachmentsSize=" + (attachments != null ? attachments.size() : "null") +
+                ", ratings=" + ratings +
+                ", userFavorites=" + userFavorites +
+                '}';
+    }
+
     public void setUserFavorites(List<UserFavorites> userFavorites) {
         this.userFavorites = userFavorites;
     }
+
+
+
+
 }

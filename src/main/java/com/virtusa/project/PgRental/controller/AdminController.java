@@ -10,6 +10,7 @@ import com.virtusa.project.PgRental.service.PropertyService;
 import com.virtusa.project.PgRental.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -87,6 +88,13 @@ public class AdminController {
     public ResponseEntity<List<UserDTO>> getApprovedUsers() {
         List<UserDTO> approvedUsers = userService.getApprovedUsers();
         return ResponseEntity.ok(approvedUsers);
+    }
+
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
+        return ResponseEntity.noContent().build();
     }
 }
 
