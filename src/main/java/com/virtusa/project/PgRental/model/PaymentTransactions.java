@@ -1,25 +1,32 @@
 package com.virtusa.project.PgRental.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.*;
-
-import java.math.BigDecimal;
-import java.sql.Timestamp;
 
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class PaymentTransactions {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long transactionId;
-    private BigDecimal amount;
-    private Timestamp transactionDate;
-    private String paymentMethod;
-    private String status;
+    private String paymentId;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "booking_id")
     private Booking booking;
+
+    public Booking getBooking() {
+        return booking;
+    }
+
+    public void setBooking(Booking booking) {
+        this.booking = booking;
+    }
+
+    public String getPaymentId() {
+        return paymentId;
+    }
+
+    public void setPaymentId(String paymentId) {
+        this.paymentId = paymentId;
+    }
+
 }

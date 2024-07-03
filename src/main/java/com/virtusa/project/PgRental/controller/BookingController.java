@@ -6,6 +6,7 @@ import com.virtusa.project.PgRental.service.BookingService;
 import com.virtusa.project.PgRental.service.impl.CustomUserDetailsService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -26,12 +27,11 @@ public class BookingController {
     private CustomUserDetailsService customUserDetailsService;
 
     @PostMapping
-    public ResponseEntity<Void> createBooking(@RequestBody BookingDto bookingDto) {
+    public ResponseEntity<BookingDto> createBooking(@RequestBody BookingDto bookingDto) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         CustomUserDetails userDetails = (CustomUserDetails) customUserDetailsService.loadUserByUsername(username);
         bookingDto.setUserId(userDetails.getUserId());
-
         if (bookingDto.getBookingTime() == null) {
             bookingDto.setBookingTime(new Timestamp(System.currentTimeMillis()));
         }
@@ -41,9 +41,8 @@ public class BookingController {
             cal.add(Calendar.DAY_OF_MONTH, 31);
             bookingDto.setNextPaymentDate(cal.getTime());
         }
-        
-        bookingService.createBooking(bookingDto);
-        return ResponseEntity.ok().build();
+        BookingDto bookingDto1 = bookingService.createBooking(bookingDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(bookingDto1);
     }
 
     @PutMapping("/{id}")

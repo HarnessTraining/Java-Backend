@@ -1,5 +1,6 @@
 package com.virtusa.project.PgRental.dto;
 
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,9 +11,13 @@ import lombok.NoArgsConstructor;
 public class UserDTO {
 
     private long userId;
+    @Column(unique = true, nullable = false)
     private String userName;
+    @Column(unique = true, nullable = false)
     private String email;
     private String password;
+
+    @Column(unique = true, nullable = false)
     private String phoneNumber;
     private boolean adminValid;
 

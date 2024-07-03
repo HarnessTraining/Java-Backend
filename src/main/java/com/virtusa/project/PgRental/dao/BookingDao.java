@@ -2,10 +2,8 @@ package com.virtusa.project.PgRental.dao;
 
 import com.virtusa.project.PgRental.dto.BookingDto;
 import com.virtusa.project.PgRental.model.Booking;
-import com.virtusa.project.PgRental.repository.BookingRepository;
-import com.virtusa.project.PgRental.repository.UserRepository;
-import com.virtusa.project.PgRental.repository.PropertyRepository;
-import com.virtusa.project.PgRental.repository.RoomRepository;
+import com.virtusa.project.PgRental.model.PaymentTransactions;
+import com.virtusa.project.PgRental.repository.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,6 +19,9 @@ public class BookingDao {
     private BookingRepository bookingRepository;
 
     @Autowired
+    private PaymentTransactionsRepo paymentTransactionsRepo;
+
+    @Autowired
     private UserRepository userRepository;
 
     @Autowired
@@ -32,12 +33,13 @@ public class BookingDao {
     @Autowired
     private ModelMapper modelMapper;
 
-    public void createBooking(BookingDto bookingDto) {
+    public BookingDto createBooking(BookingDto bookingDto) {
         Booking booking = modelMapper.map(bookingDto, Booking.class);
         booking.setUser(userRepository.findById(bookingDto.getUserId()).orElse(null));
         booking.setProperty(propertyRepository.findById(bookingDto.getPropertyId()).orElse(null));
         booking.setRoom(roomRepository.findById(bookingDto.getRoomId()).orElse(null));
-        bookingRepository.save(booking);
+        Booking booking1 = bookingRepository.save(booking);
+        return modelMapper.map(booking1,BookingDto.class);
     }
 
     public void updateBooking(BookingDto bookingDto) {
@@ -79,4 +81,16 @@ public class BookingDao {
         }
         return bookingDtoList;
     }
-}
+
+    public void savePaymentTransaction(Long bookingId, String paymentId) throws Exception {
+        Booking bookingOptional = bookingRepository.findById(bookingId).get();
+            PaymentTransactions paymentTransaction = new PaymentTransactions();
+            paymentTransaction.setPaymentId(paymentId);
+            paymentTransaction.setBooking(bookingOptional);
+            bookingOptional.setConfirmed(true);
+            bookingOptional.getPaymentTransactions().add(paymentId);
+            paymentTransactionsRepo.save(paymentTransaction);
+            bookingRepository.save(bookingOptional);
+        }
+    }
+

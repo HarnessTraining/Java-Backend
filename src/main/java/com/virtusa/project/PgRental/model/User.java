@@ -15,20 +15,11 @@ public class User{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userId;
-    
     private String userName;
     private String email;
     private String password;
     private String phoneNumber;
     private boolean adminValid;
-
-    public boolean isAdminValid() {
-        return adminValid;
-    }
-
-    public void setAdminValid(boolean adminValid) {
-        this.adminValid = adminValid;
-    }
 
     private boolean adminVerified;
     private boolean hasProperty;
@@ -93,14 +84,13 @@ public class User{
         this.phoneNumber = phoneNumber;
     }
 
-//    public boolean isAdmin() {
-//        return isAdmin;
-//    }
-//
-//    public void setAdmin(boolean admin) {
-//        isAdmin = admin;
-//    }
+    public boolean isAdminValid() {
+    return adminValid;
+}
 
+    public void setAdminValid(boolean adminValid) {
+        this.adminValid = adminValid;
+    }
     public boolean isAdminVerified() {
         return adminVerified;
     }

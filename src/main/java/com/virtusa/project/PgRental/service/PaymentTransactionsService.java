@@ -1,15 +1,13 @@
 package com.virtusa.project.PgRental.service;
 
-import java.util.List;
-import java.util.Optional;
-
 import com.virtusa.project.PgRental.dto.PaymentTransactionsDto;
-import com.virtusa.project.PgRental.model.PaymentTransactions;
+
+import java.util.List;
 
 public interface PaymentTransactionsService {
-    List<PaymentTransactions> getAllTransactions();
+    List<PaymentTransactionsDto> getAllTransactions();
 
-    Optional<PaymentTransactions> getTransactionById(Long id);
+//    Optional<PaymentTransactionsDto> getTransactionById(Long id);
 
-    PaymentTransactions createTransaction(PaymentTransactionsDto paymentTransactionsDTO);
+    PaymentTransactionsDto createTransaction(PaymentTransactionsDto paymentTransactionsDTO);
 }
