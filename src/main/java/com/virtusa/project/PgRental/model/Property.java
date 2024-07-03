@@ -80,27 +80,6 @@ public class Property {
         return pgAddress;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Property{");
-        sb.append("propertyId=").append(propertyId);
-        sb.append(", pgName='").append(pgName).append('\'');
-        sb.append(", pgType=").append(pgType);
-        sb.append(", pgAddress='").append(pgAddress).append('\'');
-        sb.append(", pgPhoneNumber='").append(pgPhoneNumber).append('\'');
-        sb.append(", pgEmail='").append(pgEmail).append('\'');
-        sb.append(", isApproved=").append(isApproved);
-        sb.append(", user=").append(user != null ? user.toString() : "null");
-        sb.append(", complaints=").append(complaints != null ? complaints.size() : "null");
-        sb.append(", pgFacilities=").append(pgFacilities != null ? pgFacilities.size() : "null");
-        sb.append(", rooms=").append(rooms != null ? rooms.size() : "null");
-        sb.append(", attachmentsSize=").append(attachments != null ? attachments.size() : "null");
-        sb.append(", ratings=").append(ratings != null ? ratings.size() : "null");
-        sb.append(", userFavorites=").append(userFavorites != null ? userFavorites.size() : "null");
-        sb.append('}');
-        return sb.toString();
-    }
 
     public void setPgAddress(String pgAddress) {
         this.pgAddress = pgAddress;
@@ -182,7 +161,31 @@ public class Property {
         return userFavorites;
     }
 
+    @Override
+    public String toString() {
+        return "Property{" +
+                "propertyId=" + propertyId +
+                ", pgName='" + pgName + '\'' +
+                ", pgType=" + pgType +
+                ", pgAddress='" + pgAddress + '\'' +
+                ", pgPhoneNumber='" + pgPhoneNumber + '\'' +
+                ", pgEmail='" + pgEmail + '\'' +
+                ", isApproved=" + isApproved +
+                ", user=" + user +
+                ", complaints=" + complaints +
+                ", pgFacilities=" + pgFacilities +
+                ", rooms=" + rooms +
+                ", attachmentsSize=" + (attachments != null ? attachments.size() : "null") +
+                ", ratings=" + ratings +
+                ", userFavorites=" + userFavorites +
+                '}';
+    }
+
     public void setUserFavorites(List<UserFavorites> userFavorites) {
         this.userFavorites = userFavorites;
     }
+
+
+
+
 }
