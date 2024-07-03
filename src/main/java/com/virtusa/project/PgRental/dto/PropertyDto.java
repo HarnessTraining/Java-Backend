@@ -23,6 +23,28 @@ public class PropertyDto {
 
     private List<AttachmentDto> attachments;
 
+    private List<UserFavoritesDto> userFavorites;
+    public boolean isIsApproved() {
+        return this.isApproved;
+    }
+
+    public boolean getIsApproved() {
+        return this.isApproved;
+    }
+
+    public void setIsApproved(boolean isApproved) {
+        this.isApproved = isApproved;
+    }
+
+    public List<UserFavoritesDto> getUserFavorites() {
+        return this.userFavorites;
+    }
+
+    public void setUserFavorites(List<UserFavoritesDto> userFavorites) {
+        this.userFavorites = userFavorites;
+    }
+
+
     public List<PgFacilitiesDto> getPgFacilities() {
         return pgFacilities;
     }
