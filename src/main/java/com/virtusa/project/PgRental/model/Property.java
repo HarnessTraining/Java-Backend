@@ -35,22 +35,22 @@ public class Property {
     @ManyToOne
     private User user;
 
-    @OneToMany(mappedBy = "property", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "property", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<Complaints> complaints;
 
-    @OneToMany(mappedBy = "property",cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "property",cascade = CascadeType.REMOVE,fetch = FetchType.LAZY)
     private List<PgFacilities> pgFacilities;
 
-    @OneToMany(mappedBy = "property",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "property",cascade = CascadeType.REMOVE,fetch = FetchType.LAZY)
     private List<Room> rooms;
 
-    @OneToMany(mappedBy = "property", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "property", cascade = CascadeType.REMOVE,fetch = FetchType.LAZY)
     private List<Attachment> attachments;
 
-    @OneToMany(mappedBy = "property",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "property",cascade = CascadeType.REMOVE,fetch = FetchType.LAZY)
     private List<Rating> ratings;
 
-    @OneToMany(mappedBy = "property", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "property", cascade = CascadeType.REMOVE,fetch = FetchType.LAZY)
     private List<UserFavorites> userFavorites;
 
     public long getPropertyId() {
@@ -80,6 +80,7 @@ public class Property {
     public String getPgAddress() {
         return pgAddress;
     }
+
 
     public void setPgAddress(String pgAddress) {
         this.pgAddress = pgAddress;

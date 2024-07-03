@@ -15,16 +15,14 @@ import java.util.List;
 @RequestMapping("/properties")
 @CrossOrigin(origins = "http://localhost:3000") // Allow only your frontend origin
 public class PropertyController {
+    
     @Autowired
     private JwtUtils jwtUtils;
     private final PropertyService propertyService;
 
-
     public PropertyController(PropertyService propertyService) {
         this.propertyService = propertyService;
     }
-
-
 
     @GetMapping("/{propertyId}")
     public ResponseEntity<PropertyDto> getPropertyById(@PathVariable long propertyId)
