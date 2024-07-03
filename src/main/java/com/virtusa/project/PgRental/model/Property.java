@@ -12,7 +12,6 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIgnoreProperties({"rooms"})
 public class Property {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
