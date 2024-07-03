@@ -15,16 +15,14 @@ import java.util.List;
 @RequestMapping("/properties")
 @CrossOrigin(origins = "http://localhost:3000") // Allow only your frontend origin
 public class PropertyController {
+    
     @Autowired
     private JwtUtils jwtUtils;
     private final PropertyService propertyService;
 
-
     public PropertyController(PropertyService propertyService) {
         this.propertyService = propertyService;
     }
-
-
 
     @GetMapping("/{propertyId}")
     public ResponseEntity<PropertyDto> getPropertyById(@PathVariable long propertyId)
@@ -38,11 +36,18 @@ public class PropertyController {
         }
     }
 
-    @GetMapping("/gett")
+    @GetMapping("/get")
     public ResponseEntity<List<PropertyDto>> getAllProperties() {
         List<PropertyDto> propertyDtos = propertyService.getAllProperties();
         return ResponseEntity.ok(propertyDtos);
     }
+
+    @GetMapping("/approved")
+    public ResponseEntity<List<PropertyDto>> getApprovedProperties() {
+        List<PropertyDto> approvedProperties = propertyService.getApprovedProperties();
+        return ResponseEntity.ok(approvedProperties);
+    }
+
 
     @PostMapping("/addProperty")
     public ResponseEntity<PropertyDto> createProperty(@RequestHeader("Authorization") String token,@RequestBody PropertyDto propertyDto) {
