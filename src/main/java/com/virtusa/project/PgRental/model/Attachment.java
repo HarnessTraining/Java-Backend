@@ -1,88 +1,33 @@
 package com.virtusa.project.PgRental.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Attachment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String fileName;
-    private String fileType;
-
-    @ManyToOne
-    @JoinColumn(name = "property_id")
-    private Property property;
-
-    public Property getProperty() {
-        return property;
-    }
-
-    public void setProperty(Property property) {
-        this.property= property;
-    }
-
-    public Attachment() {
-    }
+    @Lob
+    @Column(length = 100000, name = "image", nullable = false)
+    private byte[] image;
 
     @Lob
-    @Column(columnDefinition = "LONGBLOB")
-    private byte[] data;
+    @Column(length = 100000)
+    private String base64Img;
 
-    public Attachment( String fileName, String fileType, byte[] data,Property property) {
-        this.fileName = fileName;
-        this.fileType = fileType;
-        this.property = property;
-        this.data = data;
-    }
+    @Column(name="property_id")
+    private long propertyId;
 
-    public Long getId() {
-        return id;
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "property_id", insertable = false, updatable = false)
+    private Property property;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
-
-    public String getFileType() {
-        return fileType;
-    }
-
-    public void setFileType(String fileType) {
-        this.fileType = fileType;
-    }
-
-    public byte[] getData() {
-        return data;
-    }
-
-    public void setData(byte[] data) {
-        this.data = data;
-    }
-
-    @Override
-    public String toString() {
-        return "{" +
-            " id='" + getId() + "'" +
-            ", fileName='" + getFileName() + "'" +
-            ", fileType='" + getFileType() + "'" +
-            ",  propertyId=" + (property != null ? property.getPropertyId() : "null")+
-            ", data='" + getData() + "'" +
-            "}";
-    }
 
 }
-
-   
