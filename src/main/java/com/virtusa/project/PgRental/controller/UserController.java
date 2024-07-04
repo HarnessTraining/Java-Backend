@@ -28,14 +28,12 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
-        logger.info("Creating user: {}", userDTO.getUserName());
+    public ResponseEntity<?> createUser(@RequestBody UserDTO userDTO) {
         try {
             UserDTO createdUser = userService.createUser(userDTO);
             return ResponseEntity.ok(createdUser);
         } catch (Exception e) {
-            logger.error("Error creating user", e);
-            return ResponseEntity.status(500).body(null); // Customize as needed
+            return ResponseEntity.status(409).body(e.getMessage());
         }
     }
     

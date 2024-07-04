@@ -1,13 +1,12 @@
 package com.virtusa.project.PgRental.service.impl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.virtusa.project.PgRental.dao.BookingDao;
 import com.virtusa.project.PgRental.dto.BookingDto;
 import com.virtusa.project.PgRental.service.BookingService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @Service
@@ -17,8 +16,8 @@ public class BookingServiceImpl implements BookingService {
     private BookingDao bookingDao;
 
     @Override
-    public void createBooking(BookingDto bookingDto) {
-        bookingDao.createBooking(bookingDto);
+    public BookingDto createBooking(BookingDto bookingDto) {
+        return bookingDao.createBooking(bookingDto);
     }
 
     @Override
@@ -45,5 +44,11 @@ public class BookingServiceImpl implements BookingService {
     public List<BookingDto> getBookingsByUserId(Long userId) {
         return bookingDao.getBookingsByUserId(userId);
     }
-    
+
+    @Override
+    public void savePaymentTransaction(Long bookingId, String paymentId) throws Exception {
+        bookingDao.savePaymentTransaction(bookingId,paymentId);
+    }
+
+
 }

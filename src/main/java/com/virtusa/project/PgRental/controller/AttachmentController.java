@@ -5,18 +5,12 @@ import com.virtusa.project.PgRental.dto.AttachmentDto;
 import com.virtusa.project.PgRental.service.AttachmentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
-@RequestMapping("/attach")
+@RequestMapping("attach")
 public class AttachmentController {
 
     private final AttachmentService attachmentService;
@@ -54,7 +48,7 @@ public class AttachmentController {
     }
 
     @GetMapping("/getPropImg/{propertyId}")
-public ResponseEntity<AttachmentDto> getPropImgByPropertyId(@PathVariable("propertyId") long propertyId) {
+    public ResponseEntity<AttachmentDto> getPropImgByPropertyId(@PathVariable("propertyId") long propertyId) {
     AttachmentDto attachmentDto = attachmentService.getPropImgByPropertyId(propertyId);
     if (attachmentDto != null) {
         return ResponseEntity.ok(attachmentDto);
