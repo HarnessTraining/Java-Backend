@@ -13,7 +13,7 @@ public class Attachment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @Lob
     @Column(length = 100000, name = "image", nullable = false)
