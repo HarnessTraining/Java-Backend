@@ -1,8 +1,6 @@
 package com.virtusa.project.PgRental.dao;
 
-import com.virtusa.project.PgRental.dto.PropertyDto;
 import com.virtusa.project.PgRental.dto.UserDTO;
-import com.virtusa.project.PgRental.model.Property;
 import com.virtusa.project.PgRental.model.User;
 import com.virtusa.project.PgRental.repository.UserRepository;
 import org.modelmapper.ModelMapper;
@@ -27,7 +25,20 @@ public class UserDao {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public UserDTO createUser(UserDTO userDTO) {
+    public UserDTO createUser(UserDTO userDTO) throws Exception {
+        Optional<User> existingUserByEmail=userRepository.findByEmail(userDTO.getEmail());
+        if (existingUserByEmail.isPresent()) {
+            throw new Exception("Email is already in use");
+        }
+        Optional<User> existingUserByUserName = userRepository.findByUserName(userDTO.getUserName());
+        if (existingUserByUserName.isPresent()) {
+            throw new Exception("Username is already in use");
+        }
+        Optional<User> existingUserByPhone = userRepository.findByPhoneNumber(userDTO.getPhoneNumber());
+        if (existingUserByPhone.isPresent()) {
+            throw new Exception("Phone Number is already in use");
+        }
+
         User user = modelMapper.map(userDTO, User.class);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user = userRepository.save(user);

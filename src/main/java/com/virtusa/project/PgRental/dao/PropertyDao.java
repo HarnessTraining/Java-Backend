@@ -69,6 +69,13 @@ public class PropertyDao {
                 .map(property -> modelMapper.map(property, PropertyDto.class))
                 .collect(Collectors.toList());
     }
+    
+    public List<PropertyDto> findApprovedProperties() {
+        List<Property> approvedProperties = propertyRepository.findByIsApproved(true);
+        return approvedProperties.stream()
+                .map(property -> modelMapper.map(property, PropertyDto.class))
+                .collect(Collectors.toList());
+    }
 }
 
 

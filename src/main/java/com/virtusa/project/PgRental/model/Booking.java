@@ -1,11 +1,13 @@
 package com.virtusa.project.PgRental.model;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -126,13 +128,7 @@ public class Booking {
         this.room = room;
     }
 
-    public List<PaymentTransactions> getPaymentTransactions() {
-        return paymentTransactions;
-    }
 
-    public void setPaymentTransactions(List<PaymentTransactions> paymentTransactions) {
-        this.paymentTransactions = paymentTransactions;
-    }
 
     private Date startDate;
     private Date endDate;
@@ -153,10 +149,16 @@ public class Booking {
     @ManyToOne
     @JoinColumn(name = "roomId")
     private Room room;
+    @ElementCollection
+    private List<String> paymentTransactions;
 
-    @OneToMany(mappedBy = "booking", cascade = CascadeType.REMOVE)
-    private List<PaymentTransactions> paymentTransactions;
+    public List<String> getPaymentTransactions() {
+        return paymentTransactions;
+    }
 
+    public void setPaymentTransactions(List<String> paymentTransactions) {
+        this.paymentTransactions = paymentTransactions;
+    }
 
     public Booking() {
         this.isConfirmed = false;
