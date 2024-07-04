@@ -35,6 +35,7 @@ public class BookingController {
         if (bookingDto.getBookingTime() == null) {
             bookingDto.setBookingTime(new Timestamp(System.currentTimeMillis()));
         }
+        System.out.println(bookingDto.getStartDate());
         if (bookingDto.getStartDate() != null && bookingDto.getNextPaymentDate() == null) {
             Calendar cal = Calendar.getInstance();
             cal.setTime(bookingDto.getStartDate());

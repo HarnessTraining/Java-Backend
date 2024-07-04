@@ -45,7 +45,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/users", "/properties/addProperty","/pgfacilities","/rooms","/facilities","/attach/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/login", "/auth/signin", "/auth/validate").permitAll()
-                        .requestMatchers("/facilities","/properties/{id}").permitAll()
+                        .requestMatchers("/facilities","/properties/{id}","/attach/getProImg/{propertyId}").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler));
