@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -16,6 +18,7 @@ public class ComplaintUpdates {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long updateId;
     private String updateDescription;
+    @CreationTimestamp
     private Timestamp updateTime;
 
     @ManyToOne
@@ -25,4 +28,5 @@ public class ComplaintUpdates {
     @ManyToOne
     @JoinColumn(name = "updated_by")
     private User updatedBy;
+
 }
