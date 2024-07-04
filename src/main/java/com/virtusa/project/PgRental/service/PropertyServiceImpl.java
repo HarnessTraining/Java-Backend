@@ -2,6 +2,8 @@ package com.virtusa.project.PgRental.service;
 
 import com.virtusa.project.PgRental.dao.PropertyDao;
 import com.virtusa.project.PgRental.dto.PropertyDto;
+import com.virtusa.project.PgRental.repository.PropertyRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,7 @@ public class PropertyServiceImpl implements PropertyService {
     private final PropertyDao propertyDao;
     @Autowired
     private PropertyService propertyService;
+
 
     public PropertyServiceImpl(PropertyDao propertyDao) {
         this.propertyDao = propertyDao;
@@ -55,8 +58,16 @@ public class PropertyServiceImpl implements PropertyService {
         propertyDao.deleteProperty(propertyId);
     }
 
+
+
     @Override
     public List<PropertyDto> getUnapprovedProperties() {
         return propertyDao.findUnapprovedProperties();
+
+    }
+
+    @Override
+    public List<PropertyDto> getApprovedProperties() {
+        return propertyDao.findApprovedProperties();
     }
 }

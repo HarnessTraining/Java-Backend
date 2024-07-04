@@ -26,7 +26,8 @@ public class BookingDto {
     private long userId;
     private long propertyId;
     private long roomId;
-    private List<Long> paymentTransactionIds;
+
+    private List<String> paymentTransactions;
 
     public long getBookingId() {
         return bookingId;
@@ -132,11 +133,11 @@ public class BookingDto {
         this.roomId = roomId;
     }
 
-    public List<Long> getPaymentTransactionIds() {
-        return paymentTransactionIds;
+    public List<String> getPaymentTransactions() {
+        return paymentTransactions;
     }
 
-    public void setPaymentTransactionIds(List<Long> paymentTransactionIds) {
-        this.paymentTransactionIds = paymentTransactionIds;
+    public void setPaymentTransactions(List<String> paymentTransactions) {
+        this.paymentTransactions = paymentTransactions;
     }
 }

@@ -42,6 +42,13 @@ public class PropertyController {
         return ResponseEntity.ok(propertyDtos);
     }
 
+    @GetMapping("/approved")
+    public ResponseEntity<List<PropertyDto>> getApprovedProperties() {
+        List<PropertyDto> approvedProperties = propertyService.getApprovedProperties();
+        return ResponseEntity.ok(approvedProperties);
+    }
+
+
     @PostMapping("/addProperty")
     public ResponseEntity<PropertyDto> createProperty(@RequestHeader("Authorization") String token,@RequestBody PropertyDto propertyDto) {
         String jwtToken = token.substring(7);

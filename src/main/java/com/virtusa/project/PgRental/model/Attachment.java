@@ -1,21 +1,33 @@
 package com.virtusa.project.PgRental.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
+
+import java.util.Arrays;
 
 @Entity
 @Data
+@AllArgsConstructor
+@Builder
 public class Attachment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
-    private String fileName;
-    private String fileType;
+    @Lob
+    @Column(length = 100000, name = "image", nullable = false)
+    private byte[] image;
 
-    @ManyToOne
-    @JoinColumn(name = "property_id")
+    @Lob
+    @Column(length = 100000)
+    private String base64Img;
+
+    @Column(name="property_id")
+    private long propertyId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "property_id", insertable = false, updatable = false)
     private Property property;
 
     public Property getProperty() {
@@ -26,6 +38,15 @@ public class Attachment {
         this.property= property;
     }
 
+    @Override
+    public String toString() {
+        return "Attachment{" +
+                "id=" + id +
+                ", propertyId=" + (property != null ? property.getPropertyId() : "null")+
+                ", data=" + Arrays.toString(data) +
+                '}';
+    }
+
     public Attachment() {
     }
 
@@ -33,9 +54,7 @@ public class Attachment {
     @Column(columnDefinition = "LONGBLOB")
     private byte[] data;
 
-    public Attachment( String fileName, String fileType, byte[] data,Property property) {
-        this.fileName = fileName;
-        this.fileType = fileType;
+    public Attachment(byte[] data,Property property) {
         this.property = property;
         this.data = data;
     }
@@ -48,22 +67,6 @@ public class Attachment {
         this.id = id;
     }
 
-    public String getFileName() {
-        return fileName;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
-
-    public String getFileType() {
-        return fileType;
-    }
-
-    public void setFileType(String fileType) {
-        this.fileType = fileType;
-    }
-
     public byte[] getData() {
         return data;
     }
@@ -71,18 +74,6 @@ public class Attachment {
     public void setData(byte[] data) {
         this.data = data;
     }
-
-    @Override
-    public String toString() {
-        return "{" +
-            " id='" + getId() + "'" +
-            ", fileName='" + getFileName() + "'" +
-            ", fileType='" + getFileType() + "'" +
-            ",  propertyId=" + (property != null ? property.getPropertyId() : "null")+
-            ", data='" + getData() + "'" +
-            "}";
-    }
-
 }
 
    

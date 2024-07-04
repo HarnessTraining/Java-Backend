@@ -2,7 +2,6 @@ package com.virtusa.project.PgRental.service.impl;
 
 
 import com.virtusa.project.PgRental.dao.UserDao;
-import com.virtusa.project.PgRental.dto.PropertyDto;
 import com.virtusa.project.PgRental.dto.UserDTO;
 import com.virtusa.project.PgRental.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,7 @@ public class UserServiceImpl implements UserService {
     UserDao userDao;
 
     @Override
-    public UserDTO createUser(UserDTO userDTO) {
+    public UserDTO createUser(UserDTO userDTO) throws Exception {
         return userDao.createUser(userDTO);
     }
 
