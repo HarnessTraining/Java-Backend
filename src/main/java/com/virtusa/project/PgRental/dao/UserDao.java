@@ -68,19 +68,21 @@ public class UserDao {
     public UserDTO updateUser(Long id, UserDTO userDTO) {
         Optional<User> optionalUser = userRepository.findById(id);
         if (optionalUser.isPresent()) {
-            // Encode the password before saving
-            userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
-
-            User updatedUser = modelMapper.map(userDTO, User.class);
-            updatedUser.setUserId(id); // Ensure the ID is set correctly
-            updatedUser = userRepository.save(updatedUser);
-
+            User existingUser = optionalUser.get();
+            
+            // Update only the email and phone number
+            existingUser.setEmail(userDTO.getEmail());
+            existingUser.setPhoneNumber(userDTO.getPhoneNumber());
+    
+            // Save the updated user back to the database
+            User updatedUser = userRepository.save(existingUser);
+    
             return modelMapper.map(updatedUser, UserDTO.class);
         } else {
             throw new RuntimeException("User not found with id " + id);
         }
     }
-
+    
     public void deleteUser(Long id) {
         Optional<User> optionalUser = userRepository.findById(id);
         if (optionalUser.isPresent()) {

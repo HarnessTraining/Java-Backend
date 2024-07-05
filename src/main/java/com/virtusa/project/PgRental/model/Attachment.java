@@ -14,9 +14,8 @@ public class Attachment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
     @Lob
-    @Column(length = 100000, name = "image", nullable = false)
+    @Column(columnDefinition = "LONGBLOB")
     private byte[] image;
 
     @Lob

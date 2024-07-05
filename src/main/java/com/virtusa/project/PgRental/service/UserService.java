@@ -24,10 +24,7 @@ public interface UserService {
     void disapproveUser(Long userId) throws Exception;
     List<UserDTO> getUnapprovedUsers();
     List<UserDTO> getApprovedUsers();
-
-
-
-//    UserDTO updateUser(Long id, UserDTO userDTO);
+    //  UserDTO updateUser(Long id, UserDTO userDTO);
 //
 //    void deleteUser(Long id);
 //
