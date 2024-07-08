@@ -1,6 +1,8 @@
 package com.virtusa.project.PgRental.controller;
 
 import com.virtusa.project.PgRental.dto.UserDTO;
+import com.virtusa.project.PgRental.model.User;
+import com.virtusa.project.PgRental.repository.UserRepository;
 import com.virtusa.project.PgRental.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +28,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @PostMapping
     public ResponseEntity<?> createUser(@RequestBody UserDTO userDTO) {
@@ -87,5 +92,28 @@ public class UserController {
         userService.deleteUser(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping("/bookingApproved/{id}")
+    public ResponseEntity<Void> updateHasBooking(@PathVariable Long id){
+        User user = userRepository.findById(id).get();
+        user.setHasBooking(true);
+        userRepository.save(user);
+        return ResponseEntity.noContent().build();
+    }
+
+
+
+    @GetMapping("/hasBooking/{id}")
+    public ResponseEntity<Boolean> hasBooking(@PathVariable Long id) {
+        User user = userRepository.findById(id).orElse(null);
+        if (user != null) {
+            return ResponseEntity.ok(user.isHasBooking());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
+
 
 }
