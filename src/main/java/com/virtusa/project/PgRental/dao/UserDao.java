@@ -64,8 +64,7 @@ public class UserDao {
 //        }
 //        return Optional.empty();
     }
-
-    public UserDTO updateUser(Long id, UserDTO userDTO) {
+    public UserDTO updateUser1(Long id, UserDTO userDTO) {
         Optional<User> optionalUser = userRepository.findById(id);
         if (optionalUser.isPresent()) {
             // Encode the password before saving
@@ -75,6 +74,18 @@ public class UserDao {
             updatedUser.setUserId(id); // Ensure the ID is set correctly
             updatedUser = userRepository.save(updatedUser);
 
+            return modelMapper.map(updatedUser, UserDTO.class);
+        } else {
+            throw new RuntimeException("User not found with id " + id);
+        }
+    }
+    public UserDTO updateUser(Long id, UserDTO userDTO) {
+        Optional<User> optionalUser = userRepository.findById(id);
+        if (optionalUser.isPresent()) {
+            User existingUser = optionalUser.get();
+            existingUser.setEmail(userDTO.getEmail());
+            existingUser.setPhoneNumber(userDTO.getPhoneNumber());
+            User updatedUser = userRepository.save(existingUser);
             return modelMapper.map(updatedUser, UserDTO.class);
         } else {
             throw new RuntimeException("User not found with id " + id);
@@ -108,6 +119,10 @@ public class UserDao {
                 .map(user -> modelMapper.map(user, UserDTO.class))
                 .collect(Collectors.toList());
     }
-    
-    
+
+
+    public UserDTO updateHasBooking(UserDTO userDTO) {
+        User user = userRepository.save(modelMapper.map(userDTO,User.class));
+        return modelMapper.map(user,UserDTO.class);
+    }
 }

@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
     public UserDTO approveUser(Long userId) throws Exception {
         UserDTO userDTO = getUserById(userId).orElseThrow(() -> new Exception("User not found"));
         userDTO.setAdminVerified(true);
-        return userDao.updateUser(userId, userDTO);
+        return userDao.updateUser1(userId, userDTO);
     }
 
     @Override
@@ -64,6 +64,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserDTO> getApprovedUsers() {
         return userDao.findapprovedUsers();
+    }
+
+    @Override
+    public UserDTO updatehasBooking(UserDTO userDTO1) {
+        return userDao.updateHasBooking(userDTO1);
     }
 
 }

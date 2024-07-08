@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/properties")
-@CrossOrigin(origins = "http://localhost:3000") // Allow only your frontend origin
+@CrossOrigin(origins = "http://localhost:3000")
 public class PropertyController {
     
     @Autowired
