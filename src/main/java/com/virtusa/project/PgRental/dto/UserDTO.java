@@ -31,8 +31,19 @@ public class UserDTO {
 
     private boolean adminVerified;
     private boolean hasProperty;
+
+    private boolean hasBooking;
     private String referralCode;
     private int referralDiscount;
+
+    public boolean isHasBooking() {
+        return hasBooking;
+    }
+
+    public void setHasBooking(boolean hasBooking) {
+        this.hasBooking = hasBooking;
+    }
+
 
 //       private List<PropertyDto> propertyList;
 //
@@ -127,6 +138,5 @@ public class UserDTO {
     public void setReferralDiscount(int referralDiscount) {
         this.referralDiscount = referralDiscount;
     }
-
 
 }

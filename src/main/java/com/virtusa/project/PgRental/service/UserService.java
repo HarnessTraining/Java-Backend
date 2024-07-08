@@ -25,6 +25,7 @@ public interface UserService {
     List<UserDTO> getUnapprovedUsers();
     List<UserDTO> getApprovedUsers();
 
+    UserDTO updatehasBooking(UserDTO userDTO1);
 
 
 //    UserDTO updateUser(Long id, UserDTO userDTO);

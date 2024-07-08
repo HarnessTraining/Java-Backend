@@ -2,7 +2,6 @@ package com.virtusa.project.PgRental.service;
 
 import com.virtusa.project.PgRental.dao.RoomDao;
 import com.virtusa.project.PgRental.dto.RoomDto;
-import com.virtusa.project.PgRental.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
