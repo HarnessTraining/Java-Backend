@@ -8,7 +8,7 @@ import java.util.Arrays;
 @Entity
 @Data
 @AllArgsConstructor
-@Builder
+@Builder    
 public class Attachment {
 
     @Id
@@ -16,7 +16,7 @@ public class Attachment {
     private long id;
 
     @Lob
-    @Column(length = 100000, name = "image", nullable = false)
+    @Column(columnDefinition = "LONGBLOB")
     private byte[] image;
 
     @Lob
@@ -43,20 +43,10 @@ public class Attachment {
         return "Attachment{" +
                 "id=" + id +
                 ", propertyId=" + (property != null ? property.getPropertyId() : "null")+
-                ", data=" + Arrays.toString(data) +
                 '}';
     }
 
     public Attachment() {
-    }
-
-    @Lob
-    @Column(columnDefinition = "LONGBLOB")
-    private byte[] data;
-
-    public Attachment(byte[] data,Property property) {
-        this.property = property;
-        this.data = data;
     }
 
     public Long getId() {
@@ -67,13 +57,7 @@ public class Attachment {
         this.id = id;
     }
 
-    public byte[] getData() {
-        return data;
-    }
 
-    public void setData(byte[] data) {
-        this.data = data;
-    }
 }
 
    
