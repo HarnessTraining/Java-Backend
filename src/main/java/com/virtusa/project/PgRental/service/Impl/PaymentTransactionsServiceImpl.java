@@ -1,15 +1,12 @@
 package com.virtusa.project.PgRental.service.impl;
 
-import java.util.List;
-import java.util.Optional;
-
+import com.virtusa.project.PgRental.dao.PaymentTransactionDao;
+import com.virtusa.project.PgRental.dto.PaymentTransactionsDto;
+import com.virtusa.project.PgRental.service.PaymentTransactionsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.virtusa.project.PgRental.dao.PaymentTransactionDao;
-import com.virtusa.project.PgRental.dto.PaymentTransactionsDto;
-import com.virtusa.project.PgRental.model.PaymentTransactions;
-import com.virtusa.project.PgRental.service.PaymentTransactionsService;
+import java.util.List;
 
 @Service
 public class PaymentTransactionsServiceImpl implements PaymentTransactionsService {
@@ -17,17 +14,17 @@ public class PaymentTransactionsServiceImpl implements PaymentTransactionsServic
     @Autowired
     PaymentTransactionDao paymentTransactionDao;
     @Override
-    public List<PaymentTransactions> getAllTransactions() {
+    public List<PaymentTransactionsDto> getAllTransactions() {
        return paymentTransactionDao.getAllTransaction();
     }
 
+//    @Override
+//    public Optional<PaymentTransactionsDto> getTransactionById(Long id) {
+//        return paymentTransactionDao.getTransactionById(id);
+//    }
+//
     @Override
-    public Optional<PaymentTransactions> getTransactionById(Long id) {
-        return paymentTransactionDao.getTransactionById(id);
-    }
-    
-    @Override
-    public PaymentTransactions createTransaction(PaymentTransactionsDto paymentTransactionsDTO) {
+    public PaymentTransactionsDto createTransaction(PaymentTransactionsDto paymentTransactionsDTO) {
         return paymentTransactionDao.createTransaction(paymentTransactionsDTO);
     }
 

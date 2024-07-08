@@ -1,9 +1,9 @@
 package com.virtusa.project.PgRental.model;
 
 import jakarta.persistence.*;
-import lombok.*;
-
-import java.util.Arrays;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 
 @Entity
 @Data
@@ -30,13 +30,6 @@ public class Attachment {
     @JoinColumn(name = "property_id", insertable = false, updatable = false)
     private Property property;
 
-    public Property getProperty() {
-        return property;
-    }
-
-    public void setProperty(Property property) {
-        this.property= property;
-    }
 
     @Override
     public String toString() {
@@ -49,15 +42,48 @@ public class Attachment {
     public Attachment() {
     }
 
-    public Long getId() {
+
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
+    public byte[] getImage() {
+        return image;
+    }
 
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    public String getBase64Img() {
+        return base64Img;
+    }
+
+    public void setBase64Img(String base64Img) {
+        this.base64Img = base64Img;
+    }
+
+    public long getPropertyId() {
+        return propertyId;
+    }
+
+    public void setPropertyId(long propertyId) {
+        this.propertyId = propertyId;
+    }
+
+    public Property getProperty() {
+        return property;
+    }
+
+    public void setProperty(Property property) {
+        this.property = property;
+    }
+
+  
 }
 
    

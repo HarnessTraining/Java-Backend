@@ -1,5 +1,6 @@
 package com.virtusa.project.PgRental.dto;
 
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,9 +11,13 @@ import lombok.NoArgsConstructor;
 public class UserDTO {
 
     private long userId;
+    @Column(unique = true, nullable = false)
     private String userName;
+    @Column(unique = true, nullable = false)
     private String email;
     private String password;
+
+    @Column(unique = true, nullable = false)
     private String phoneNumber;
     private boolean adminValid;
 
@@ -26,8 +31,19 @@ public class UserDTO {
 
     private boolean adminVerified;
     private boolean hasProperty;
+
+    private boolean hasBooking;
     private String referralCode;
     private int referralDiscount;
+
+    public boolean isHasBooking() {
+        return hasBooking;
+    }
+
+    public void setHasBooking(boolean hasBooking) {
+        this.hasBooking = hasBooking;
+    }
+
 
 //       private List<PropertyDto> propertyList;
 //
@@ -122,6 +138,5 @@ public class UserDTO {
     public void setReferralDiscount(int referralDiscount) {
         this.referralDiscount = referralDiscount;
     }
-
 
 }

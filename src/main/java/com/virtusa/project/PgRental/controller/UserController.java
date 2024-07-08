@@ -1,6 +1,8 @@
 package com.virtusa.project.PgRental.controller;
 
 import com.virtusa.project.PgRental.dto.UserDTO;
+import com.virtusa.project.PgRental.model.User;
+import com.virtusa.project.PgRental.repository.UserRepository;
 import com.virtusa.project.PgRental.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,15 +29,16 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @PostMapping
-    public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
-        logger.info("Creating user: {}", userDTO.getUserName());
+    public ResponseEntity<?> createUser(@RequestBody UserDTO userDTO) {
         try {
             UserDTO createdUser = userService.createUser(userDTO);
             return ResponseEntity.ok(createdUser);
         } catch (Exception e) {
-            logger.error("Error creating user", e);
-            return ResponseEntity.status(500).body(null); // Customize as needed
+            return ResponseEntity.status(409).body(e.getMessage());
         }
     }
     
@@ -88,5 +91,28 @@ public class UserController {
         userService.deleteUser(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping("/bookingApproved/{id}")
+    public ResponseEntity<Void> updateHasBooking(@PathVariable Long id){
+        User user = userRepository.findById(id).get();
+        user.setHasBooking(true);
+        userRepository.save(user);
+        return ResponseEntity.noContent().build();
+    }
+
+
+
+    @GetMapping("/hasBooking/{id}")
+    public ResponseEntity<Boolean> hasBooking(@PathVariable Long id) {
+        User user = userRepository.findById(id).orElse(null);
+        if (user != null) {
+            return ResponseEntity.ok(user.isHasBooking());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
+
 
 }

@@ -1,6 +1,5 @@
 package com.virtusa.project.PgRental.service;
 
-import com.virtusa.project.PgRental.dto.PropertyDto;
 import com.virtusa.project.PgRental.dto.UserDTO;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +8,7 @@ import java.util.Optional;
 
 @Service
 public interface UserService {
-    public UserDTO createUser(UserDTO userDTO);
+    public UserDTO createUser(UserDTO userDTO) throws Exception;
 
     List<UserDTO> getAllUsers();
 
@@ -25,6 +24,9 @@ public interface UserService {
     void disapproveUser(Long userId) throws Exception;
     List<UserDTO> getUnapprovedUsers();
     List<UserDTO> getApprovedUsers();
+
+    UserDTO updatehasBooking(UserDTO userDTO1);
+
 
 //    UserDTO updateUser(Long id, UserDTO userDTO);
 //

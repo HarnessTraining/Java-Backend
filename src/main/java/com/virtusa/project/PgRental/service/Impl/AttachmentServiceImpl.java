@@ -1,19 +1,16 @@
 package com.virtusa.project.PgRental.service.impl;
 
 import com.virtusa.project.PgRental.dao.AttachmentDao;
-import com.virtusa.project.PgRental.dao.BookingDao;
 import com.virtusa.project.PgRental.dto.AttachmentDto;
-import com.virtusa.project.PgRental.model.Attachment;
 import com.virtusa.project.PgRental.repository.AttachmentRepository;
 import com.virtusa.project.PgRental.service.AttachmentService;
-
-import java.io.IOException;
-import java.util.Base64;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.util.Base64;
 
 @Service
 public class AttachmentServiceImpl implements AttachmentService {
@@ -30,10 +27,7 @@ public class AttachmentServiceImpl implements AttachmentService {
         this.attachmentRepository = attachmentRepository;
     }
 
-    // @Override
-    // public Attachment saveAttachment(MultipartFile file, AttachmentDto attachmentDto) throws Exception {
-    //     return null;
-    // }
+
 
     @Override
     public AttachmentDto saveAttachment(MultipartFile file, Long propertyId) throws IOException {
@@ -44,6 +38,8 @@ public class AttachmentServiceImpl implements AttachmentService {
         attachmentDto.setPropertyId(propertyId);
         return attachmentDao.saveAttachment(attachmentDto);
     }
+
+
 
     @Override
     public AttachmentDto getPropImgByPropertyId(long propertyId) {

@@ -1,8 +1,6 @@
 package com.virtusa.project.PgRental.dao;
 
-import com.virtusa.project.PgRental.dto.PropertyDto;
 import com.virtusa.project.PgRental.dto.UserDTO;
-import com.virtusa.project.PgRental.model.Property;
 import com.virtusa.project.PgRental.model.User;
 import com.virtusa.project.PgRental.repository.UserRepository;
 import org.modelmapper.ModelMapper;
@@ -27,7 +25,20 @@ public class UserDao {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public UserDTO createUser(UserDTO userDTO) {
+    public UserDTO createUser(UserDTO userDTO) throws Exception {
+        Optional<User> existingUserByEmail=userRepository.findByEmail(userDTO.getEmail());
+        if (existingUserByEmail.isPresent()) {
+            throw new Exception("Email is already in use");
+        }
+        Optional<User> existingUserByUserName = userRepository.findByUserName(userDTO.getUserName());
+        if (existingUserByUserName.isPresent()) {
+            throw new Exception("Username is already in use");
+        }
+        Optional<User> existingUserByPhone = userRepository.findByPhoneNumber(userDTO.getPhoneNumber());
+        if (existingUserByPhone.isPresent()) {
+            throw new Exception("Phone Number is already in use");
+        }
+
         User user = modelMapper.map(userDTO, User.class);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user = userRepository.save(user);
@@ -53,8 +64,7 @@ public class UserDao {
 //        }
 //        return Optional.empty();
     }
-
-    public UserDTO updateUser(Long id, UserDTO userDTO) {
+    public UserDTO updateUser1(Long id, UserDTO userDTO) {
         Optional<User> optionalUser = userRepository.findById(id);
         if (optionalUser.isPresent()) {
             // Encode the password before saving
@@ -64,6 +74,18 @@ public class UserDao {
             updatedUser.setUserId(id); // Ensure the ID is set correctly
             updatedUser = userRepository.save(updatedUser);
 
+            return modelMapper.map(updatedUser, UserDTO.class);
+        } else {
+            throw new RuntimeException("User not found with id " + id);
+        }
+    }
+    public UserDTO updateUser(Long id, UserDTO userDTO) {
+        Optional<User> optionalUser = userRepository.findById(id);
+        if (optionalUser.isPresent()) {
+            User existingUser = optionalUser.get();
+            existingUser.setEmail(userDTO.getEmail());
+            existingUser.setPhoneNumber(userDTO.getPhoneNumber());
+            User updatedUser = userRepository.save(existingUser);
             return modelMapper.map(updatedUser, UserDTO.class);
         } else {
             throw new RuntimeException("User not found with id " + id);
@@ -97,6 +119,10 @@ public class UserDao {
                 .map(user -> modelMapper.map(user, UserDTO.class))
                 .collect(Collectors.toList());
     }
-    
-    
+
+
+    public UserDTO updateHasBooking(UserDTO userDTO) {
+        User user = userRepository.save(modelMapper.map(userDTO,User.class));
+        return modelMapper.map(user,UserDTO.class);
+    }
 }
