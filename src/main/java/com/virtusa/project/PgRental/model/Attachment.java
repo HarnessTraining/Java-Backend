@@ -8,7 +8,7 @@ import lombok.Data;
 @Entity
 @Data
 @AllArgsConstructor
-@Builder
+@Builder    
 public class Attachment {
 
     @Id
