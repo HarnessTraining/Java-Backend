@@ -67,6 +67,11 @@ public class PropertyController {
         return ResponseEntity.ok(updatedPropertyDto);
     }
 
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<PropertyDto>> getPropertiesByUserId(@PathVariable long userId) {
+        List<PropertyDto> properties = propertyService.getPropertiesByUserId(userId);
+        return ResponseEntity.ok(properties);
+    }
     @DeleteMapping("/{propertyId}")
     public ResponseEntity<Void> deleteProperty(@PathVariable long propertyId)
             throws ChangeSetPersister.NotFoundException {

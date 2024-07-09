@@ -76,6 +76,13 @@ public class PropertyDao {
                 .map(property -> modelMapper.map(property, PropertyDto.class))
                 .collect(Collectors.toList());
     }
+
+    public List<PropertyDto> getPropertiesByUserId(long userId) {
+        List<Property> properties = propertyRepository.findByUserUserId(userId);
+        return properties.stream()
+                .map(property -> modelMapper.map(property, PropertyDto.class))
+                .collect(Collectors.toList());
+    }
 }
 
 
