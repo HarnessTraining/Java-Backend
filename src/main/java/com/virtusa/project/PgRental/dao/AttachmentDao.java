@@ -3,6 +3,11 @@ package com.virtusa.project.PgRental.dao;
 import com.virtusa.project.PgRental.dto.AttachmentDto;
 import com.virtusa.project.PgRental.model.Attachment;
 import com.virtusa.project.PgRental.repository.AttachmentRepository;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -92,5 +97,26 @@ public class AttachmentDao {
         attachDto.setPropertyId(propImgModel.getPropertyId());;
 
         return attachDto;
+    }
+
+    //multipleimages
+    public List<AttachmentDto> saveMultipleAttachments(List<AttachmentDto> attachmentDtos) {
+    List<AttachmentDto> savedAttachments = new ArrayList<>();
+    for (AttachmentDto attachmentDto : attachmentDtos) {
+        Attachment attachment = new Attachment();
+        attachment.setImage(attachmentDto.getImage());
+        attachment.setBase64Img(attachmentDto.getBase64Img());
+        attachment.setPropertyId(attachmentDto.getPropertyId());
+        attachmentRepository.save(attachment);
+        savedAttachments.add(modelMapper.map(attachment, AttachmentDto.class));
+    }
+    return savedAttachments;
+}
+  //multiple images
+  public List<AttachmentDto> getImagesByPropertyId(Long propertyId) {
+        List<Attachment> attachments = attachmentRepository.findByPropertyId(propertyId);
+        return attachments.stream()
+                .map(attachment -> modelMapper.map(attachment, AttachmentDto.class))
+                .collect(Collectors.toList());
     }
 }
