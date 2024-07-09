@@ -20,15 +20,6 @@ public class UserDTO {
     @Column(unique = true, nullable = false)
     private String phoneNumber;
     private boolean adminValid;
-
-    public boolean isAdminValid() {
-        return adminValid;
-    }
-
-    public void setAdminValid(boolean adminValid) {
-        this.adminValid = adminValid;
-    }
-
     private boolean adminVerified;
     private boolean hasProperty;
 
@@ -139,4 +130,29 @@ public class UserDTO {
         this.referralDiscount = referralDiscount;
     }
 
+
+    public boolean isAdminValid() {
+        return adminValid;
+    }
+
+    public void setAdminValid(boolean adminValid) {
+        this.adminValid = adminValid;
+    }
+
+    @Override
+    public String toString() {
+        return "UserDTO{" +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", adminValid=" + adminValid +
+                ", adminVerified=" + adminVerified +
+                ", hasProperty=" + hasProperty +
+                ", hasBooking=" + hasBooking +
+                ", referralCode='" + referralCode + '\'' +
+                ", referralDiscount=" + referralDiscount +
+                '}';
+    }
 }

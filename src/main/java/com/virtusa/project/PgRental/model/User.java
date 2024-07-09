@@ -171,4 +171,22 @@ public class User{
     public void setHasBooking(boolean hasBooking) {
         this.hasBooking = hasBooking;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", adminValid=" + adminValid +
+                ", adminVerified=" + adminVerified +
+                ", hasProperty=" + hasProperty +
+                ", hasBooking=" + hasBooking +
+                ", referralCode='" + referralCode + '\'' +
+                ", referralDiscount=" + referralDiscount +
+                ", notifications=" + notifications +
+                '}';
+    }
 }

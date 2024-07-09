@@ -27,6 +27,8 @@ public interface UserService {
 
     UserDTO updatehasBooking(UserDTO userDTO1);
 
+    int getUserByReferralCode(String referralCode) throws Exception;
+
 
 //    UserDTO updateUser(Long id, UserDTO userDTO);
 //

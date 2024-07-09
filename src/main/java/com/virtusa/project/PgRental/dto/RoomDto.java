@@ -73,6 +73,8 @@ public class RoomDto {
     private Date startDate;
     private Date endDate;
 
+    private int beds;
+
     @JsonIgnore
     private PropertyDto property;
     private boolean available;
