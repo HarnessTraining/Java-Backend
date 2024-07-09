@@ -4,9 +4,6 @@ import com.virtusa.project.PgRental.dto.BookingDto;
 
 import java.util.List;
 
-
-
-
 public interface BookingService {
     BookingDto createBooking(BookingDto bookingDto);
     void updateBooking(BookingDto bookingDto);

@@ -30,10 +30,10 @@ public class PaymentTransactionDao {
         return (List<PaymentTransactionsDto>) modelMapper.map(paymentTransactionsRepository.findAll(),PaymentTransactions.class);
     }
 
-    public PaymentTransactionsDto getTransactionById(Long id) {
-        PaymentTransactions paymentTransaction = paymentTransactionsRepository.findById(id).get();
-        return modelMapper.map(paymentTransaction,PaymentTransactionsDto.class);
-    }
+    // public PaymentTransactionsDto getTransactionById(Long id) {
+    //     PaymentTransactions paymentTransaction = paymentTransactionsRepository.findById(id).get();
+    //     return modelMapper.map(paymentTransaction,PaymentTransactionsDto.class);
+    // }
 
     public PaymentTransactionsDto createTransaction(PaymentTransactionsDto paymentTransactionsDTO) {
         try {

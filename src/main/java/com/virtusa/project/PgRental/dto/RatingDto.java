@@ -6,7 +6,6 @@ public class RatingDto {
     private String description;
     private Long propertyId;
 
-    // Getters and Setters
     public Long getUserId() {
         return userId;
     }

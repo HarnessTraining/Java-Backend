@@ -24,4 +24,9 @@ public interface UserFavoriteRepo extends JpaRepository<UserFavorites, Long> {
 
     @Query("SELECT uf FROM UserFavorites uf WHERE uf.user.id = :uid AND uf.property.id = :pid")
     Optional<UserFavorites> findByUserIdAndPropertyId(@Param("uid") Long uid, @Param("pid") Long pid);
+
+    @Query(value = "select * from user_favorites where user_id = :userId", nativeQuery = true)
+    List<UserFavorites> findAllByUser(long userId);
+
+    // Optional<UserFavorites> findAllByUserId(Long userId);
 }

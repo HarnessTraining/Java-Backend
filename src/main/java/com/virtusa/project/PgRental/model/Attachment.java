@@ -8,13 +8,12 @@ import lombok.Data;
 @Entity
 @Data
 @AllArgsConstructor
-@Builder
+@Builder    
 public class Attachment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
     @Lob
     @Column(columnDefinition = "LONGBLOB")
     private byte[] image;
