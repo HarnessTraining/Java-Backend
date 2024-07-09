@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.virtusa.project.PgRental.model.PaymentTransactions;
 
-public interface PaymentTransactionsRepo extends JpaRepository<PaymentTransactions, Long> {
+public interface PaymentTransactionsRepo extends JpaRepository<PaymentTransactions,String> {
 
 }
 
