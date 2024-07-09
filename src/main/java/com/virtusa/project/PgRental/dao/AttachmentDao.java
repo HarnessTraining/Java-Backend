@@ -7,10 +7,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
 @Component
 public class AttachmentDao {
 
@@ -43,27 +39,27 @@ public class AttachmentDao {
 //         }
 //     }
 
-     public AttachmentDto getAttachmentDetails(Long id) {
-         Optional<Attachment> attachment = attachmentRepository.findById(id);
-         return attachment.map(a -> modelMapper.map(a, AttachmentDto.class)).orElse(null);
-     }
+//     public AttachmentDto getAttachmentDetails(Long id) {
+//         Optional<Attachment> attachment = attachmentRepository.findById(id);
+//         return attachment.map(a -> modelMapper.map(a, AttachmentDto.class)).orElse(null);
+//     }
+//
+//     public void deleteAttachment(Long id) {
+//         attachmentRepository.deleteById(id);
+//     }
+//
+//     public List<AttachmentDto> getAllAttachments() {
+//         List<Attachment> attachmentList = attachmentRepository.findAll();
+//         List<AttachmentDto> attachmentDtoList = new ArrayList<>();
+//         for (Attachment attachment : attachmentList) {
+//             AttachmentDto attachmentDto = modelMapper.map(attachment, AttachmentDto.class);
+//             attachmentDtoList.add(attachmentDto);
+//         }
+//         return attachmentDtoList;
+//     }
 
-     public void deleteAttachment(Long id) {
-         attachmentRepository.deleteById(id);
-     }
 
-     public List<AttachmentDto> getAllAttachments() {
-         List<Attachment> attachmentList = attachmentRepository.findAll();
-         List<AttachmentDto> attachmentDtoList = new ArrayList<>();
-         for (Attachment attachment : attachmentList) {
-             AttachmentDto attachmentDto = modelMapper.map(attachment, AttachmentDto.class);
-             attachmentDtoList.add(attachmentDto);
-         }
-         return attachmentDtoList;
-     }
-
-
-///
+/////
 //    public AttachmentDto getPropImgByPropertyId(long propertyId) {
 //        Attachment propImgModel = attachmentRepository.findPropByPropertyId(propertyId);
 //        System.out.println("model: "+propImgModel.toString());
@@ -72,7 +68,29 @@ public class AttachmentDao {
 //        attachDto.setId(propImgModel.getId());
 //        attachDto.setImage(propImgModel.getImage());
 //        attachDto.setPropertyId(propImgModel.getPropertyId());;
-//
 //        return attachDto;
 //    }
+
+    public AttachmentDto saveAttachment(AttachmentDto attachmentDto) {
+        Attachment attachment = new Attachment();
+        attachment.setId(attachment.getId());
+        attachment.setImage(attachmentDto.getImage());
+        attachment.setBase64Img(attachmentDto.getBase64Img());
+        attachment.setPropertyId(attachmentDto.getPropertyId());
+        attachmentRepository.save(attachment);
+        AttachmentDto attachDto = modelMapper.map(attachment, AttachmentDto.class);
+        return attachDto;
+    }
+
+    public AttachmentDto getPropImgByPropertyId(long propertyId) {
+        Attachment propImgModel = attachmentRepository.findPropByPropertyId(propertyId);
+        System.out.println("model: "+propImgModel.toString());
+        AttachmentDto attachDto = new AttachmentDto();
+        attachDto.setBase64Img(propImgModel.getBase64Img());
+        attachDto.setId(propImgModel.getId());
+        attachDto.setImage(propImgModel.getImage());
+        attachDto.setPropertyId(propImgModel.getPropertyId());;
+
+        return attachDto;
+    }
 }

@@ -23,6 +23,7 @@ public class User{
 
     private boolean adminVerified;
     private boolean hasProperty;
+    private boolean hasBooking;
     private String referralCode;
     private int referralDiscount;
 //
@@ -161,5 +162,13 @@ public class User{
 
     public void setNotifications(List<Notifications> notifications) {
         this.notifications = notifications;
+    }
+
+    public boolean isHasBooking() {
+        return hasBooking;
+    }
+
+    public void setHasBooking(boolean hasBooking) {
+        this.hasBooking = hasBooking;
     }
 }
