@@ -9,4 +9,5 @@ import com.virtusa.project.PgRental.model.Rating;
 public interface RatingRepo extends JpaRepository<Rating, Long> {
 
     List<Rating> findByUserUserId(Long userId);
+    List<Rating> findByPropertyPropertyId(Long propertyId);
 }

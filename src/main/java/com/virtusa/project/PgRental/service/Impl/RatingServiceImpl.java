@@ -30,4 +30,9 @@ public class RatingServiceImpl implements RatingService {
     public List<Rating> getRatingsByUserId(Long userId) {
         return ratingDao.getRatingsByUserId(userId);
     }
+
+    @Override
+    public List<Rating> getRatingsByPropertyId(Long propertyId) {
+        return ratingDao.getRatingsByPropertyId(propertyId); // Add this method
+    }
 }

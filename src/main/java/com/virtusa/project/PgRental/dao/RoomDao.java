@@ -1,7 +1,7 @@
 package com.virtusa.project.PgRental.dao;
 
 
-
+import com.virtusa.project.PgRental.dto.RoomAvailabilityUpdateDto;
 import com.virtusa.project.PgRental.dto.RoomDto;
 import com.virtusa.project.PgRental.model.Room;
 import com.virtusa.project.PgRental.repository.RoomRepository;
@@ -24,9 +24,7 @@ public class RoomDao {
 
     public RoomDto save(RoomDto roomDto) {
         Room room = modelMapper.map(roomDto, Room.class);
-        System.out.println(room);
         Room savedRoom = roomRepository.save(room);
-        System.out.println(savedRoom);
         return modelMapper.map(savedRoom, RoomDto.class);
     }
 
@@ -44,6 +42,18 @@ public class RoomDao {
 
     public void delete(Long id) {
         roomRepository.deleteById(id);
+    }
+
+    public RoomDto updateRoomAvailability(RoomAvailabilityUpdateDto roomAvailabilityUpdateDto) {
+        Optional<Room> roomOptional = roomRepository.findById(roomAvailabilityUpdateDto.getRoomId());
+        if (roomOptional.isPresent()) {
+            Room room = roomOptional.get();
+            room.setBeds(roomAvailabilityUpdateDto.getBeds());
+            room.setAvailable(roomAvailabilityUpdateDto.isAvailable());
+            return modelMapper.map(roomRepository.save(room),RoomDto.class);
+        } else {
+            throw new RuntimeException("Room not found with id " + roomAvailabilityUpdateDto.getRoomId());
+        }
     }
 }
 

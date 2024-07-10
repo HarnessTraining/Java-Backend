@@ -64,19 +64,13 @@ public class UserDao {
 //        }
 //        return Optional.empty();
     }
-    public UserDTO updateUser1(Long id, UserDTO userDTO) {
+    public UserDTO updateUser1(Long id) {
         Optional<User> optionalUser = userRepository.findById(id);
         if (optionalUser.isPresent()) {
-            User existingUser = optionalUser.get();
-            
-            // Update only the email and phone number
-            existingUser.setEmail(userDTO.getEmail());
-            existingUser.setPhoneNumber(userDTO.getPhoneNumber());
-    
-            // Save the updated user back to the database
-            User updatedUser = userRepository.save(existingUser);
-    
-            return modelMapper.map(updatedUser, UserDTO.class);
+            User user = optionalUser.get();
+            user.setAdminVerified(true);
+            userRepository.save(user);
+            return modelMapper.map(user, UserDTO.class);
         } else {
             throw new RuntimeException("User not found with id " + id);
         }
@@ -126,5 +120,13 @@ public class UserDao {
     public UserDTO updateHasBooking(UserDTO userDTO) {
         User user = userRepository.save(modelMapper.map(userDTO,User.class));
         return modelMapper.map(user,UserDTO.class);
+    }
+
+    public int getUserByReferralCode(String referralCode) throws Exception {
+        Optional<User> user = userRepository.findByReferralCode(referralCode);
+        if(user.isEmpty()){
+            throw new Exception("Referral doesn't exist");
+        }
+        return user.get().getReferralDiscount();
     }
 }

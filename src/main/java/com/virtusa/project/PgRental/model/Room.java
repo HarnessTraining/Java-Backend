@@ -34,8 +34,82 @@ public class Room {
 
     private boolean available;
 
+    private int beds;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "propertyId")
     @JsonIgnore
     private Property property;
+
+    public long getRoomId() {
+        return roomId;
+    }
+
+    public void setRoomId(long roomId) {
+        this.roomId = roomId;
+    }
+
+    public long getRoomNumber() {
+        return roomNumber;
+    }
+
+    public void setRoomNumber(long roomNumber) {
+        this.roomNumber = roomNumber;
+    }
+
+    public SharingType getSharingType() {
+        return sharingType;
+    }
+
+    public void setSharingType(SharingType sharingType) {
+        this.sharingType = sharingType;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
+
+    public int getBeds() {
+        return beds;
+    }
+
+    public void setBeds(int beds) {
+        this.beds = beds;
+    }
+
+    public Property getProperty() {
+        return property;
+    }
+
+    public void setProperty(Property property) {
+        this.property = property;
+    }
 }

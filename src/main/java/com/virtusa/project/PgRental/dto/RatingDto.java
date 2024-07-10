@@ -1,9 +1,13 @@
 package com.virtusa.project.PgRental.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class RatingDto {
     private Long userId;
     private int rating;
     private String description;
+
+    @JsonIgnore
     private Long propertyId;
 
     public Long getUserId() {

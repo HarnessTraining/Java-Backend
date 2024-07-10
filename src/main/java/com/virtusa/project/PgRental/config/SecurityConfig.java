@@ -43,9 +43,9 @@ public class SecurityConfig {
                 .cors(withDefaults()) // Enable CORS
                 .csrf(csrf -> csrf.disable()) // Disable CSRF for simplicity
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(HttpMethod.POST, "/users", "/properties/addProperty","/pgfacilities","/rooms","/facilities","/attach/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/users", "/properties/addProperty","/pgfacilities","/rooms","/facilities","/attach/**","/myRating/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/login", "/auth/signin", "/auth/validate").permitAll()
-                        .requestMatchers("/facilities","/properties/{id}","/attach/getPropImg/{propertyId}","/users/bookingApproved/{id}","/getProp/{propertyId}").permitAll()
+                        .requestMatchers("/facilities","/properties/{id}","/attach/getPropImg/{propertyId}","/users/bookingApproved/{id}","/getProp/{propertyId}","/myRating/{userId}","/myRating/property/{propertyId}").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler));

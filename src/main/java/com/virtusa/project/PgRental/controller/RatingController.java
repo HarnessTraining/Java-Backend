@@ -35,4 +35,12 @@ public class RatingController {
         List<Rating> ratings = ratingService.getRatingsByUserId(userId);
         return ResponseEntity.ok(ratings);
     }
+
+    @GetMapping("/property/{propertyId}")
+    public ResponseEntity<List<Rating>> getRatingsByPropertyId(@PathVariable Long propertyId) {
+        List<Rating> ratings = ratingService.getRatingsByPropertyId(propertyId);
+        return ResponseEntity.ok(ratings);
+    }
+
+
 }
