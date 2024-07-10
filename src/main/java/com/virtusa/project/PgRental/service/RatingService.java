@@ -9,4 +9,5 @@ public interface RatingService {
     void createReview(RatingDto ratingDto);
     void updateReview(Long id, RatingDto ratingDto);
     List<Rating> getRatingsByUserId(Long userId);
+    List<Rating> getRatingsByPropertyId(Long propertyId);
 }

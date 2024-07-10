@@ -2,6 +2,7 @@
 package com.virtusa.project.PgRental.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -30,9 +31,9 @@ public class User{
 //    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
 //    private List<Property> propertyList;
 //
-//    @JsonIgnore
-//    @OneToMany(mappedBy = "user",cascade = CascadeType.REMOVE)
-//    private List<Rating> ratings;
+    @JsonIgnore
+    @OneToMany(mappedBy = "user",cascade = CascadeType.REMOVE)
+    private List<Rating> ratings;
 //
 //    @JsonIgnore
 //    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
@@ -132,13 +133,13 @@ public class User{
 //        this.propertyList = propertyList;
 ////    }
 //
-//    public List<Rating> getRatings() {
-//        return ratings;
-//    }
+    public List<Rating> getRatings() {
+        return ratings;
+    }
 //
-//    public void setRatings(List<Rating> ratings) {
-//        this.ratings = ratings;
-//    }
+    public void setRatings(List<Rating> ratings) {
+        this.ratings = ratings;
+    }
 //
 //    public List<UserFavorites> getUserFavorites() {
 //        return userFavorites;

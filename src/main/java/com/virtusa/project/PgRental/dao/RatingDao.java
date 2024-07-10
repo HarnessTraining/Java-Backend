@@ -67,6 +67,10 @@ public class RatingDao {
         return ratingRepo.findByUserUserId(userId);
     }
 
+    public List<Rating> getRatingsByPropertyId(Long propertyId) {
+        return ratingRepo.findByPropertyPropertyId(propertyId); // Add this method
+    }
+
     public PropertyRepo getPropertyRepo() {
         return propertyRepo;
     }
