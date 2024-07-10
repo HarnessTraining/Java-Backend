@@ -24,6 +24,17 @@ public class PropertyDto {
     private List<AttachmentDto> attachments;
 
     private List<UserFavoritesDto> userFavorites;
+
+    private String googleMapsLink;
+
+    // getters and setters
+    public String getGoogleMapsLink() {
+        return googleMapsLink;
+    }
+
+    public void setGoogleMapsLink(String googleMapsLink) {
+        this.googleMapsLink = googleMapsLink;
+    }
     public boolean isIsApproved() {
         return this.isApproved;
     }

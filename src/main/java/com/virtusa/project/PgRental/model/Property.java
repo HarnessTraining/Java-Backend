@@ -1,6 +1,5 @@
 package com.virtusa.project.PgRental.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -51,6 +50,17 @@ public class Property {
 
     @OneToMany(mappedBy = "property", cascade = CascadeType.REMOVE,fetch = FetchType.LAZY)
     private List<UserFavorites> userFavorites;
+
+    private String googleMapsLink;
+
+    // getters and setters
+    public String getGoogleMapsLink() {
+        return googleMapsLink;
+    }
+
+    public void setGoogleMapsLink(String googleMapsLink) {
+        this.googleMapsLink = googleMapsLink;
+    }
 
     public long getPropertyId() {
         return propertyId;
