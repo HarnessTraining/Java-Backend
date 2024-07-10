@@ -11,7 +11,7 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class User{
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userId;
@@ -26,20 +26,20 @@ public class User{
     private boolean hasBooking;
     private String referralCode;
     private int referralDiscount;
-//
-//    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
-//    private List<Property> propertyList;
-//
-//    @JsonIgnore
-//    @OneToMany(mappedBy = "user",cascade = CascadeType.REMOVE)
-//    private List<Rating> ratings;
-//
-//    @JsonIgnore
-//    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
-//    private List<UserFavorites> userFavorites;
-//
-//    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
-//    private List<Complaints> complaints;
+    //
+    // @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    // private List<Property> propertyList;
+    //
+    // @JsonIgnore
+    // @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    // private List<Rating> ratings;
+
+    // @JsonIgnore
+    // @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    // private List<UserFavorites> userFavorites;
+    //
+    // @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    // private List<Complaints> complaints;
 
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
@@ -86,12 +86,13 @@ public class User{
     }
 
     public boolean isAdminValid() {
-    return adminValid;
-}
+        return adminValid;
+    }
 
     public void setAdminValid(boolean adminValid) {
         this.adminValid = adminValid;
     }
+
     public boolean isAdminVerified() {
         return adminVerified;
     }
@@ -123,38 +124,38 @@ public class User{
     public void setReferralDiscount(int referralDiscount) {
         this.referralDiscount = referralDiscount;
     }
-//
-//    public List<Property> getPropertyList() {
-//        return propertyList;
-//    }
-//
-//    public void setPropertyList(List<Property> propertyList) {
-//        this.propertyList = propertyList;
-////    }
-//
-//    public List<Rating> getRatings() {
-//        return ratings;
-//    }
-//
-//    public void setRatings(List<Rating> ratings) {
-//        this.ratings = ratings;
-//    }
-//
-//    public List<UserFavorites> getUserFavorites() {
-//        return userFavorites;
-//    }
-//
-//    public void setUserFavorites(List<UserFavorites> userFavorites) {
-//        this.userFavorites = userFavorites;
-//    }
-//
-//    public List<Complaints> getComplaints() {
-//        return complaints;
-//    }
-//
-//    public void setComplaints(List<Complaints> complaints) {
-//        this.complaints = complaints;
-//    }
+    //
+    // public List<Property> getPropertyList() {
+    // return propertyList;
+    // }
+    //
+    // public void setPropertyList(List<Property> propertyList) {
+    // this.propertyList = propertyList;
+    //// }
+    //
+    // public List<Rating> getRatings() {
+    // return ratings;
+    // }
+    //
+    // public void setRatings(List<Rating> ratings) {
+    // this.ratings = ratings;
+    // }
+    //
+    // public List<UserFavorites> getUserFavorites() {
+    // return userFavorites;
+    // }
+    //
+    // public void setUserFavorites(List<UserFavorites> userFavorites) {
+    // this.userFavorites = userFavorites;
+    // }
+    //
+    // public List<Complaints> getComplaints() {
+    // return complaints;
+    // }
+    //
+    // public void setComplaints(List<Complaints> complaints) {
+    // this.complaints = complaints;
+    // }
 
     public List<Notifications> getNotifications() {
         return notifications;

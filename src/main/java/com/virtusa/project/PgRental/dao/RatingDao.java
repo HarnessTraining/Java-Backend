@@ -51,51 +51,19 @@ public class RatingDao {
 
     public void updateReview(Long id, RatingDto ratingDto) {
         Rating rating = ratingRepo.findById(id)
-            .orElseThrow(() -> new RuntimeException("Rating not found"));
-        
+                .orElseThrow(() -> new RuntimeException("Rating not found"));
+
         rating.setRating(ratingDto.getRating());
         rating.setDescription(ratingDto.getDescription());
         rating.setUser(userRepo.findById(ratingDto.getUserId())
-            .orElseThrow(() -> new RuntimeException("User not found")));
+                .orElseThrow(() -> new RuntimeException("User not found")));
         rating.setProperty(propertyRepo.findById(ratingDto.getPropertyId())
-            .orElseThrow(() -> new RuntimeException("Property not found")));
+                .orElseThrow(() -> new RuntimeException("Property not found")));
 
         ratingRepo.save(rating);
     }
 
     public List<Rating> getRatingsByUserId(Long userId) {
         return ratingRepo.findByUserUserId(userId);
-    }
-
-    public PropertyRepo getPropertyRepo() {
-        return propertyRepo;
-    }
-
-    public void setPropertyRepo(PropertyRepo propertyRepo) {
-        this.propertyRepo = propertyRepo;
-    }
-
-    public UserRepo getUserRepo() {
-        return userRepo;
-    }
-
-    public void setUserRepo(UserRepo userRepo) {
-        this.userRepo = userRepo;
-    }
-
-    public RatingRepo getRatingRepo() {
-        return ratingRepo;
-    }
-
-    public void setRatingRepo(RatingRepo ratingRepo) {
-        this.ratingRepo = ratingRepo;
-    }
-
-    public ModelMapper getModelMapper() {
-        return modelMapper;
-    }
-
-    public void setModelMapper(ModelMapper modelMapper) {
-        this.modelMapper = modelMapper;
     }
 }
