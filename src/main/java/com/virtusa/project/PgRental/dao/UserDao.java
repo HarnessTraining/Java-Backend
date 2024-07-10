@@ -64,17 +64,13 @@ public class UserDao {
 //        }
 //        return Optional.empty();
     }
-    public UserDTO updateUser1(Long id, UserDTO userDTO) {
+    public UserDTO updateUser1(Long id) {
         Optional<User> optionalUser = userRepository.findById(id);
         if (optionalUser.isPresent()) {
-            // Encode the password before saving
-            userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
-
-            User updatedUser = modelMapper.map(userDTO, User.class);
-            updatedUser.setUserId(id); // Ensure the ID is set correctly
-            updatedUser = userRepository.save(updatedUser);
-
-            return modelMapper.map(updatedUser, UserDTO.class);
+            User user = optionalUser.get();
+            user.setAdminVerified(true);
+            userRepository.save(user);
+            return modelMapper.map(user, UserDTO.class);
         } else {
             throw new RuntimeException("User not found with id " + id);
         }
@@ -124,5 +120,13 @@ public class UserDao {
     public UserDTO updateHasBooking(UserDTO userDTO) {
         User user = userRepository.save(modelMapper.map(userDTO,User.class));
         return modelMapper.map(user,UserDTO.class);
+    }
+
+    public int getUserByReferralCode(String referralCode) throws Exception {
+        Optional<User> user = userRepository.findByReferralCode(referralCode);
+        if(user.isEmpty()){
+            throw new Exception("Referral doesn't exist");
+        }
+        return user.get().getReferralDiscount();
     }
 }

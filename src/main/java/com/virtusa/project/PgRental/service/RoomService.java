@@ -1,5 +1,6 @@
 package com.virtusa.project.PgRental.service;
 
+import com.virtusa.project.PgRental.dto.RoomAvailabilityUpdateDto;
 import com.virtusa.project.PgRental.dto.RoomDto;
 
 import java.util.List;
@@ -10,4 +11,5 @@ public interface RoomService {
     List<RoomDto> getAllRooms();
     RoomDto updateRoom(Long id, RoomDto roomDto);
     void deleteRoom(Long id);
+    RoomDto updateRoomAvailability(RoomAvailabilityUpdateDto roomAvailabilityUpdateDto);
 }

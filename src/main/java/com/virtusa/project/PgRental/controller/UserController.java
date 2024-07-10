@@ -71,7 +71,6 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
         Optional<UserDTO> user = userService.getUserById(id);
-        System.out.println(user);
         if (user.isPresent()) {
             return ResponseEntity.ok(user.get());
         } else {
@@ -81,6 +80,7 @@ public class UserController {
 
     @PutMapping("/{id}")
     public ResponseEntity<UserDTO> updateUser(@PathVariable Long id, @RequestBody UserDTO userDTO) {
+        
         UserDTO updatedUser = userService.updateUser(id, userDTO);
         return ResponseEntity.ok(updatedUser);
     }
@@ -112,7 +112,35 @@ public class UserController {
         }
     }
 
+    @GetMapping("/referral/{referralCode}")
+    public ResponseEntity<Object> getUserByReferralCode(@PathVariable String referralCode) {
+        try {
+            int discount = userService.getUserByReferralCode(referralCode);
+            return ResponseEntity.ok(discount);
+        }
+       catch(Exception e) {
+            return ResponseEntity.ok().body("Referral code doesn't exist");
+        }
+    }
 
+    @PutMapping("referral/{id}")
+    public ResponseEntity<Object> referralUsed(@PathVariable String id) {
+        User userOptional= userRepository.findByReferralCode(id).get();
+        Optional<User> user = userRepository.findById(userOptional.getUserId());
+        if(user.isPresent()){
+            user.get().setReferralCode("0");
+            userRepository.save(user.get());
+        }
+        return ResponseEntity.noContent().build();
+    }
 
-
+    @GetMapping("/verified/{id}")
+    public ResponseEntity<Boolean> isVerified(@PathVariable Long id) {
+        User user = userRepository.findById(id).orElse(null);
+        if (user != null) {
+            return ResponseEntity.ok(user.isAdminVerified());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

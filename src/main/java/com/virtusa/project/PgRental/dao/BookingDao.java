@@ -74,6 +74,7 @@ public class BookingDao {
 
     public List<BookingDto> getBookingsByUserId(Long userId) {
         List<Booking> bookingList = bookingRepository.findByUser_userId(userId);
+
         List<BookingDto> bookingDtoList = new ArrayList<>();
         for (Booking booking : bookingList) {
             BookingDto bookingDto = modelMapper.map(booking, BookingDto.class);

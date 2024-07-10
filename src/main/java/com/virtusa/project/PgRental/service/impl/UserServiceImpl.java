@@ -47,9 +47,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO approveUser(Long userId) throws Exception {
-        UserDTO userDTO = getUserById(userId).orElseThrow(() -> new Exception("User not found"));
-        userDTO.setAdminVerified(true);
-        return userDao.updateUser1(userId, userDTO);
+        return userDao.updateUser1(userId);
     }
 
     @Override
@@ -69,6 +67,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO updatehasBooking(UserDTO userDTO1) {
         return userDao.updateHasBooking(userDTO1);
+    }
+
+    @Override
+    public int getUserByReferralCode(String referralCode) throws Exception {
+        return userDao.getUserByReferralCode(referralCode);
     }
 
 }

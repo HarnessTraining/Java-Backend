@@ -2,13 +2,18 @@ package com.virtusa.project.PgRental.dao;
 
 import com.virtusa.project.PgRental.model.Property;
 import com.virtusa.project.PgRental.model.Rating;
+import com.virtusa.project.PgRental.model.User;
 import com.virtusa.project.PgRental.model.UserFavorites;
 import com.virtusa.project.PgRental.repository.PropertyRepo;
+import com.virtusa.project.PgRental.repository.PropertyRepository;
 import com.virtusa.project.PgRental.repository.UserFavoriteRepo;
 import com.virtusa.project.PgRental.repository.UserRepo;
-
+import com.virtusa.project.PgRental.repository.UserRepository;
+import com.virtusa.project.PgRental.dto.PropertyDto;
+import com.virtusa.project.PgRental.dto.UserDTO;
 import com.virtusa.project.PgRental.dto.UserFavoritesDto;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,12 +26,10 @@ public class UserFavoritesDao {
 
     @Autowired
     private UserFavoriteRepo userFavoriteRepo;
-
     @Autowired
-    private PropertyRepo propertyRepo;
-
+    private PropertyRepository propertyRepository;
     @Autowired
-    private UserRepo userRepo;
+    private UserRepository userRepository;
 
     private ModelMapper modelMapper = new ModelMapper();
 
@@ -35,7 +38,7 @@ public class UserFavoritesDao {
         userFavoriteRepo.save(userFavorites);
     }
 
-    public boolean deleteUserFavorites(Long propertyId,Long userId) {
+    public boolean deleteUserFavorites(Long propertyId, Long userId) {
         // UserFavorites userFavorites = userFavoriteRepo.findById(userId).orElse(null);
         // userFavoriteRepo.delete(userFavorites);
         Optional<UserFavorites> favorite = userFavoriteRepo.findByUserIdAndPropertyId(userId, propertyId);
@@ -47,8 +50,38 @@ public class UserFavoritesDao {
         }
     }
 
-    public Optional<UserFavorites> getRatingsByUserId(Long userId) {
-        return userFavoriteRepo.findById(userId);
+    public List<UserFavoritesDto> getFavoritesByUserId(Long userId) {
+        List<UserFavoritesDto> listDto = new ArrayList<>();
+        List<UserFavorites> list = userFavoriteRepo.findAllByUser(userId);
+
+        for (UserFavorites e : list) {
+            UserFavoritesDto userFavoritesDto = new UserFavoritesDto();
+            userFavoritesDto.setFavoriteId(e.getFavoriteId());
+
+            Property property = propertyRepository.findById(e.getProperty().getPropertyId()).orElse(null);
+            if (property != null) {
+                PropertyDto propertyDto = modelMapper.map(property, PropertyDto.class);
+                userFavoritesDto.setProperty(propertyDto);
+            }
+            // else {
+            // // Handle the case where the property is not found
+
+            // continue;
+            // }
+
+            User user = userRepository.findById(e.getUser().getUserId()).orElse(null);
+            if (user != null) {
+                userFavoritesDto.setUserId(user.getUserId());
+            }
+            // else {
+            // // Handle the case where the user is not found
+            // continue;
+            // }
+
+            listDto.add(userFavoritesDto);
+        }
+
+        return listDto;
     }
 
 }
