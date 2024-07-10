@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class User{
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userId;
@@ -87,12 +87,13 @@ public class User{
     }
 
     public boolean isAdminValid() {
-    return adminValid;
-}
+        return adminValid;
+    }
 
     public void setAdminValid(boolean adminValid) {
         this.adminValid = adminValid;
     }
+
     public boolean isAdminVerified() {
         return adminVerified;
     }

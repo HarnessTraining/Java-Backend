@@ -14,8 +14,11 @@ import com.virtusa.project.PgRental.dto.UserDTO;
 import com.virtusa.project.PgRental.dto.UserFavoritesDto;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +29,7 @@ public class UserFavoritesDao {
 
     @Autowired
     private UserFavoriteRepo userFavoriteRepo;
-    @Autowired
-    private PropertyRepository propertyRepository;
-    @Autowired
-    private UserRepository userRepository;
-
+    
     private ModelMapper modelMapper = new ModelMapper();
 
     public void saveUserFavorites(UserFavoritesDto userFavoritesDto) {
@@ -51,37 +50,13 @@ public class UserFavoritesDao {
     }
 
     public List<UserFavoritesDto> getFavoritesByUserId(Long userId) {
-        List<UserFavoritesDto> listDto = new ArrayList<>();
-        List<UserFavorites> list = userFavoriteRepo.findAllByUser(userId);
+        List<UserFavorites> userFavorites = userFavoriteRepo.findAllByUser(userId);
 
-        for (UserFavorites e : list) {
-            UserFavoritesDto userFavoritesDto = new UserFavoritesDto();
-            userFavoritesDto.setFavoriteId(e.getFavoriteId());
+        Set<Long> seenPropertyIds = new HashSet<>();
 
-            Property property = propertyRepository.findById(e.getProperty().getPropertyId()).orElse(null);
-            if (property != null) {
-                PropertyDto propertyDto = modelMapper.map(property, PropertyDto.class);
-                userFavoritesDto.setProperty(propertyDto);
-            }
-            // else {
-            // // Handle the case where the property is not found
-
-            // continue;
-            // }
-
-            User user = userRepository.findById(e.getUser().getUserId()).orElse(null);
-            if (user != null) {
-                userFavoritesDto.setUserId(user.getUserId());
-            }
-            // else {
-            // // Handle the case where the user is not found
-            // continue;
-            // }
-
-            listDto.add(userFavoritesDto);
-        }
-
-        return listDto;
+        return userFavorites.stream()
+        .filter(favorite -> seenPropertyIds.add(favorite.getProperty().getPropertyId())) // Add to set and filter out duplicates
+        .map(favorite -> modelMapper.map(favorite, UserFavoritesDto.class))
+        .collect(Collectors.toList());
     }
-
 }

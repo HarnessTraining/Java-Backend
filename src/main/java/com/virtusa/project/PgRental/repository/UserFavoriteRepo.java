@@ -1,5 +1,6 @@
 package com.virtusa.project.PgRental.repository;
 
+import com.virtusa.project.PgRental.dto.UserFavoritesDto;
 import com.virtusa.project.PgRental.model.User;
 import com.virtusa.project.PgRental.model.UserFavorites;
 
