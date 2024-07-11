@@ -6,8 +6,6 @@ public class RatingDto {
     private Long userId;
     private int rating;
     private String description;
-
-    @JsonIgnore
     private Long propertyId;
 
     public Long getUserId() {

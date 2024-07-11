@@ -75,6 +75,12 @@ public class BookingController {
         return ResponseEntity.ok(bookingDtoList);
     }
 
+    @GetMapping("/property/{propertyId}")
+    public ResponseEntity<List<BookingDto>> getBookingsByPropertyId(@PathVariable Long propertyId) {
+        List<BookingDto> bookings = bookingService.getBookingsByPropertyId(propertyId);
+        return ResponseEntity.ok(bookings);
+    }
+
     @GetMapping("user/{userId}")
     public ResponseEntity<List<BookingDto>> getBookingsByUserId(@PathVariable long userId) {
         List<BookingDto> bookingDtoList = bookingService.getBookingsByUserId(userId);

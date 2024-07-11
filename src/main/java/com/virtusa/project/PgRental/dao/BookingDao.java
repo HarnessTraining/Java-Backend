@@ -4,6 +4,7 @@ import com.virtusa.project.PgRental.dto.BookingDto;
 import com.virtusa.project.PgRental.model.Booking;
 import com.virtusa.project.PgRental.model.PaymentTransactions;
 import com.virtusa.project.PgRental.repository.*;
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 public class BookingDao {
@@ -94,5 +96,14 @@ public class BookingDao {
             paymentTransactionsRepo.save(paymentTransaction);
             bookingRepository.save(bookingOptional);
         }
+
+
+    //@Transactional(readOnly = true)
+    public List<BookingDto> getBookingsByPropertyId(Long propertyId) {
+        List<Booking> bookings = bookingRepository.findByProperty_PropertyId(propertyId);
+        return bookings.stream()
+                .map(booking -> modelMapper.map(booking, BookingDto.class))
+                .collect(Collectors.toList());
+    }
     }
 

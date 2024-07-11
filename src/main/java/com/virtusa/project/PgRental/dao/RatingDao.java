@@ -42,10 +42,14 @@ public class RatingDao {
 
     public void saveReview(RatingDto ratingDto) {
         Rating rating = modelMapper.map(ratingDto, Rating.class);
+        System.out.println("asfnanafa"+rating);
+        System.out.println("asfnanafa"+ratingDto.getUserId());
+        System.out.println("asfnanafa"+ratingDto.getPropertyId());
         rating.setUser(userRepo.findById(ratingDto.getUserId())
                 .orElseThrow(() -> new RuntimeException("User not found")));
         rating.setProperty(propertyRepo.findById(ratingDto.getPropertyId())
                 .orElseThrow(() -> new RuntimeException("Property not found")));
+
         ratingRepo.save(rating);
     }
 

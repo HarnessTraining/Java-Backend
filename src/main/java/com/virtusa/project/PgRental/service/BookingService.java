@@ -12,4 +12,5 @@ public interface BookingService {
     List<BookingDto> getAllBookings();
     List<BookingDto> getBookingsByUserId(Long userId);
     void savePaymentTransaction(Long bookingId, String paymentId) throws Exception;
+    List<BookingDto> getBookingsByPropertyId(Long propertyId);
 }

@@ -8,4 +8,5 @@ import java.util.List;
 public interface BookingRepository extends JpaRepository<Booking, Long> {
 
     List<Booking> findByUser_userId(Long userId);
+    List<Booking> findByProperty_PropertyId(Long propertyId);
 }

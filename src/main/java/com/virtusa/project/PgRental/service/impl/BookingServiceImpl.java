@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 public class BookingServiceImpl implements BookingService {
 
-  @Autowired
+    @Autowired
     private BookingDao bookingDao;
 
     @Override
@@ -45,10 +45,17 @@ public class BookingServiceImpl implements BookingService {
         return bookingDao.getBookingsByUserId(userId);
     }
 
+
+
+
     @Override
     public void savePaymentTransaction(Long bookingId, String paymentId) throws Exception {
-        bookingDao.savePaymentTransaction(bookingId,paymentId);
+        bookingDao.savePaymentTransaction(bookingId, paymentId);
     }
 
+    @Override
+    public List<BookingDto> getBookingsByPropertyId(Long propertyId) {
+        return bookingDao.getBookingsByPropertyId(propertyId);
+    }
 
 }

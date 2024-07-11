@@ -15,5 +15,6 @@ public interface PropertyService {
     void disapproveProperty(long propertyId) throws ChangeSetPersister.NotFoundException;
     List<PropertyDto> getUnapprovedProperties();
     List<PropertyDto> getApprovedProperties();
+    List<PropertyDto> getPropertiesByUserId(long userId);
 
 }
