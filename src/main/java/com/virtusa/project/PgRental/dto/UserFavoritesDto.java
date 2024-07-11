@@ -12,6 +12,22 @@ public class UserFavoritesDto {
     private Long userId;
     private Long propertyId;
 
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public Long getPropertyId() {
+        return propertyId;
+    }
+
+    public void setPropertyId(Long propertyId) {
+        this.propertyId = propertyId;
+    }
+
     public Long getFavoriteId() {
         return this.favoriteId;
     }
@@ -20,16 +36,8 @@ public class UserFavoritesDto {
         this.favoriteId = favoriteId;
     }
 
-    public long getUserId() {
-        return this.userId;
-    }
-
     public void setUserId(long userId) {
         this.userId = userId;
-    }
-
-    public long getPropertyId() {
-        return this.propertyId;
     }
 
     public void setPropertyId(long propertyId) {

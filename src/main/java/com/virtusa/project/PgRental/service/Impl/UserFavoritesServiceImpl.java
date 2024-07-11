@@ -15,37 +15,35 @@ import com.virtusa.project.PgRental.repository.UserFavoriteRepo;
 import com.virtusa.project.PgRental.service.UserFavoriteService;
 
 @Service
+
 public class UserFavoritesServiceImpl implements UserFavoriteService {
 
-    
-   
     // private final UserFavoriteRepo userFavoriteRepo;
-    
+
     @Autowired
     private UserFavoritesDao userFavoritesDao;
 
     @Override
     public void saveUserFavorites(UserFavoritesDto userFavoritesDto) {
+        if (userFavoritesDto.getUserId() == null) {
+            throw new IllegalArgumentException("User ID cannot be null");
+        }
         userFavoritesDao.saveUserFavorites(userFavoritesDto);
     }
 
     @Override
-    public boolean deleteUserFavorites(Long propertyId,Long userId) {
-        return userFavoritesDao.deleteUserFavorites(propertyId,userId);
+    public boolean deleteUserFavorites(Long propertyId, Long userId) {
+        return userFavoritesDao.deleteUserFavorites(propertyId, userId);
     }
 
     @Override
-    public Optional<UserFavorites> getFavoriteProperty(Long favoriteId) {
-        return userFavoritesDao.getRatingsByUserId(favoriteId);
-
+    public List<UserFavoritesDto> getFavoriteProperty(Long userId) {
+        return userFavoritesDao.getFavoritesByUserId(userId);
     }
 
     // @Override
     // public long countFavoritePropertiesByUserId(Long userId) {
-    //     return userFavoriteRepo.countByUserId(userId);
+    // return userFavoriteRepo.countByUserId(userId);
     // }
-
-    
-
 
 }

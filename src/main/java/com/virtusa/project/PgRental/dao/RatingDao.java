@@ -51,20 +51,24 @@ public class RatingDao {
 
     public void updateReview(Long id, RatingDto ratingDto) {
         Rating rating = ratingRepo.findById(id)
-            .orElseThrow(() -> new RuntimeException("Rating not found"));
-        
+                .orElseThrow(() -> new RuntimeException("Rating not found"));
+
         rating.setRating(ratingDto.getRating());
         rating.setDescription(ratingDto.getDescription());
         rating.setUser(userRepo.findById(ratingDto.getUserId())
-            .orElseThrow(() -> new RuntimeException("User not found")));
+                .orElseThrow(() -> new RuntimeException("User not found")));
         rating.setProperty(propertyRepo.findById(ratingDto.getPropertyId())
-            .orElseThrow(() -> new RuntimeException("Property not found")));
+                .orElseThrow(() -> new RuntimeException("Property not found")));
 
         ratingRepo.save(rating);
     }
 
     public List<Rating> getRatingsByUserId(Long userId) {
         return ratingRepo.findByUserUserId(userId);
+    }
+
+    public List<Rating> getRatingsByPropertyId(Long propertyId) {
+        return ratingRepo.findByPropertyPropertyId(propertyId); // Add this method
     }
 
     public PropertyRepo getPropertyRepo() {

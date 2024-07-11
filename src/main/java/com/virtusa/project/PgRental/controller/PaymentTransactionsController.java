@@ -60,7 +60,7 @@ public class PaymentTransactionsController {
 //        }
 //    }
 
-    @PutMapping("/save")
+    @PostMapping("/save")
     public ResponseEntity<String> savePaymentTransaction(@RequestBody PaymentTransactionsDto paymentTransactionsDto) {
         try {
             bookingService.savePaymentTransaction(paymentTransactionsDto.getBookingId(), paymentTransactionsDto.getPaymentId());

@@ -27,12 +27,12 @@ public class UserFavoritesController {
     }
 
     @GetMapping("/{userId}")
-    public Optional<UserFavorites> countFavoritePropertiesByUserId(@PathVariable Long userId) {
+    public List<UserFavoritesDto> countFavoritePropertiesByUserId(@PathVariable Long userId) {
         return userFavoritesService.getFavoriteProperty(userId);
     }
 
     @DeleteMapping
-    public ResponseEntity<Void> deleteUserFavorites(@RequestBody UserFavoritesDto userFavoritesDto ) {
+    public ResponseEntity<Void> deleteUserFavorites(@RequestBody UserFavoritesDto userFavoritesDto) {
         System.out.println(userFavoritesDto);
         userFavoritesService.deleteUserFavorites(userFavoritesDto.getPropertyId(),userFavoritesDto.getUserId());
         return new ResponseEntity<>(HttpStatus.OK);

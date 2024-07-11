@@ -1,6 +1,7 @@
 package com.virtusa.project.PgRental.controller;
 
 import com.virtusa.project.PgRental.dto.PropertyDto;
+import com.virtusa.project.PgRental.dto.RoomAvailabilityUpdateDto;
 import com.virtusa.project.PgRental.dto.RoomDto;
 import com.virtusa.project.PgRental.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,12 @@ public class RoomController {
     public ResponseEntity<RoomDto> updateRoom(@PathVariable Long id, @RequestBody RoomDto roomDto) {
         RoomDto updatedRoom = roomService.updateRoom(id, roomDto);
         return ResponseEntity.ok(updatedRoom);
+    }
+
+
+    @PutMapping("/updateAvailability")
+    public RoomDto updateRoomAvailability(@RequestBody RoomAvailabilityUpdateDto roomAvailabilityUpdateDto) {
+        return roomService.updateRoomAvailability(roomAvailabilityUpdateDto);
     }
 
     @DeleteMapping("/{id}")

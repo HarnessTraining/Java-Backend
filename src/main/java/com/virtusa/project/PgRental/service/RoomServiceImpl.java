@@ -1,6 +1,7 @@
 package com.virtusa.project.PgRental.service;
 
 import com.virtusa.project.PgRental.dao.RoomDao;
+import com.virtusa.project.PgRental.dto.RoomAvailabilityUpdateDto;
 import com.virtusa.project.PgRental.dto.RoomDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,4 +40,11 @@ public class RoomServiceImpl implements RoomService {
     public void deleteRoom(Long id) {
         roomDao.delete(id);
     }
+
+    @Override
+    public RoomDto updateRoomAvailability(RoomAvailabilityUpdateDto roomAvailabilityUpdateDto) {
+       return roomDao.updateRoomAvailability(roomAvailabilityUpdateDto);
+    }
+
+
 }

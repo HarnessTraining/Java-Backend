@@ -2,6 +2,7 @@
 package com.virtusa.project.PgRental.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -11,7 +12,7 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class User{
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userId;
@@ -30,9 +31,9 @@ public class User{
 //    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
 //    private List<Property> propertyList;
 //
-//    @JsonIgnore
-//    @OneToMany(mappedBy = "user",cascade = CascadeType.REMOVE)
-//    private List<Rating> ratings;
+    @JsonIgnore
+    @OneToMany(mappedBy = "user",cascade = CascadeType.REMOVE)
+    private List<Rating> ratings;
 //
 //    @JsonIgnore
 //    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
@@ -86,12 +87,13 @@ public class User{
     }
 
     public boolean isAdminValid() {
-    return adminValid;
-}
+        return adminValid;
+    }
 
     public void setAdminValid(boolean adminValid) {
         this.adminValid = adminValid;
     }
+
     public boolean isAdminVerified() {
         return adminVerified;
     }
@@ -132,13 +134,13 @@ public class User{
 //        this.propertyList = propertyList;
 ////    }
 //
-//    public List<Rating> getRatings() {
-//        return ratings;
-//    }
+    public List<Rating> getRatings() {
+        return ratings;
+    }
 //
-//    public void setRatings(List<Rating> ratings) {
-//        this.ratings = ratings;
-//    }
+    public void setRatings(List<Rating> ratings) {
+        this.ratings = ratings;
+    }
 //
 //    public List<UserFavorites> getUserFavorites() {
 //        return userFavorites;
@@ -170,5 +172,23 @@ public class User{
 
     public void setHasBooking(boolean hasBooking) {
         this.hasBooking = hasBooking;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", adminValid=" + adminValid +
+                ", adminVerified=" + adminVerified +
+                ", hasProperty=" + hasProperty +
+                ", hasBooking=" + hasBooking +
+                ", referralCode='" + referralCode + '\'' +
+                ", referralDiscount=" + referralDiscount +
+                ", notifications=" + notifications +
+                '}';
     }
 }
