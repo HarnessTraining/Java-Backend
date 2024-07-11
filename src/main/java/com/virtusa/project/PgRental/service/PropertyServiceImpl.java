@@ -44,7 +44,7 @@ public class PropertyServiceImpl implements PropertyService {
     @Override
     public void deleteProperty(long propertyId) throws ChangeSetPersister.NotFoundException {
 
-            propertyDao.deleteProperty(propertyId);
+        propertyDao.deleteProperty(propertyId);
     }
 
     @Override
@@ -59,7 +59,6 @@ public class PropertyServiceImpl implements PropertyService {
     }
 
 
-
     @Override
     public List<PropertyDto> getUnapprovedProperties() {
         return propertyDao.findUnapprovedProperties();
@@ -69,5 +68,10 @@ public class PropertyServiceImpl implements PropertyService {
     @Override
     public List<PropertyDto> getApprovedProperties() {
         return propertyDao.findApprovedProperties();
+    }
+
+    @Override
+    public List<PropertyDto> getPropertiesByUserId(long userId) {
+        return propertyDao.getPropertiesByUserId(userId);
     }
 }
