@@ -4,10 +4,10 @@ WORKDIR /app
 
 # Copy only pom.xml first to leverage Docker cache
 COPY pom.xml .
-RUN mvn dependency:go-offline -B
+#RUN mvn dependency:go-offline -B
 
 # Now copy the rest of the source and build
-COPY src ./src
+COPY . ./
 RUN mvn clean install -DskipTests
 
 # ------------ Stage 2: Run the application ------------
