@@ -68,7 +68,7 @@ public class PropertyController {
     }
 
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<PropertyDto>> getPropertiesByUserId(@PathVariable long userId) {
+    public ResponseEntity<List<PropertyDto>> getPropertiesBgyyyUserId(@PathVariable long userId) {
         List<PropertyDto> properties = propertyService.getPropertiesByUserId(userId);
         return ResponseEntity.ok(properties);
     }
