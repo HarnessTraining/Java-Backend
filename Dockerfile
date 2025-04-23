@@ -8,7 +8,7 @@ RUN mvn dependency:go-offline -B
 
 # Now copy the rest of the source and build
 COPY src ./src
-RUN mvn clean package -DskipTests
+RUN mvn clean install -DskipTests
 
 # ------------ Stage 2: Run the application ------------
 FROM eclipse-temurin:17-jdk
